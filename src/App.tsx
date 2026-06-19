@@ -311,12 +311,15 @@ const generateSmoothPath = (points: any) => {
   return path;
 };
 
+// แก้ไขเอาคำว่า get ออก และใช้ตัวแปรธรรมดา เพื่อหลีกเลี่ยง Error: TS1056 Accessors...
 class SimulatedSet {
   set: Set<any>;
   simulatedSize: number;
+  size: number;
   constructor() {
     this.set = new Set();
     this.simulatedSize = 0;
+    this.size = 0;
   }
   add(val: any) {
     if (typeof val === "number") {
@@ -324,9 +327,8 @@ class SimulatedSet {
     } else {
       this.set.add(val);
     }
-  }
-  get size() {
-    return this.simulatedSize > 0 ? this.simulatedSize : this.set.size;
+    // อัปเดตขนาดตัวแปร size ທุกครั้งที่มีการ add แทนการใช้ getter
+    this.size = this.simulatedSize > 0 ? this.simulatedSize : this.set.size;
   }
   has(val: any) {
     return this.set.has(val);
