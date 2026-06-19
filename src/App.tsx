@@ -106,6 +106,28 @@ const PlayCircle = (p: any) => (
   </Icon>
 );
 
+// ไอคอนพระอาทิตย์ สำหรับ Light Mode
+const Sun = (p: any) => (
+  <Icon {...p}>
+    <circle cx="12" cy="12" r="5" />
+    <line x1="12" y1="1" x2="12" y2="3" />
+    <line x1="12" y1="21" x2="12" y2="23" />
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+    <line x1="1" y1="12" x2="3" y2="12" />
+    <line x1="21" y1="12" x2="23" y2="12" />
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+  </Icon>
+);
+
+// ไอคอนพระจันทร์ สำหรับ Dark Mode
+const Moon = (p: any) => (
+  <Icon {...p}>
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+  </Icon>
+);
+
 // ==========================================
 // 1. ฟังก์ชันตัวช่วยประมวลผล (HELPER FUNCTIONS)
 // ==========================================
@@ -338,39 +360,39 @@ class SimulatedSet {
 const getHeatmapCellClasses = (value: any, maxVal: any) => {
   if (value === 0)
     return {
-      bg: "bg-white",
-      textMain: "text-slate-300",
-      textSub: "text-slate-200",
+      bg: "bg-white dark:bg-slate-800",
+      textMain: "text-slate-300 dark:text-slate-600",
+      textSub: "text-slate-200 dark:text-slate-700",
     };
   const ratio = value / (maxVal || 1);
   if (ratio < 0.2)
     return {
-      bg: "bg-[#ffe4e6]",
-      textMain: "text-[#9f1239]",
-      textSub: "text-[#e11d48]",
+      bg: "bg-[#ffe4e6] dark:bg-rose-900/30",
+      textMain: "text-[#9f1239] dark:text-rose-200",
+      textSub: "text-[#e11d48] dark:text-rose-400",
     };
   if (ratio < 0.4)
     return {
-      bg: "bg-[#fecdd3]",
-      textMain: "text-[#9f1239]",
-      textSub: "text-[#e11d48]",
+      bg: "bg-[#fecdd3] dark:bg-rose-800/40",
+      textMain: "text-[#9f1239] dark:text-rose-100",
+      textSub: "text-[#e11d48] dark:text-rose-300",
     };
   if (ratio < 0.6)
     return {
-      bg: "bg-[#fda4af]",
-      textMain: "text-[#881337]",
-      textSub: "text-[#be123c]",
+      bg: "bg-[#fda4af] dark:bg-rose-700/60",
+      textMain: "text-[#881337] dark:text-rose-50",
+      textSub: "text-[#be123c] dark:text-rose-200",
     };
   if (ratio < 0.8)
     return {
-      bg: "bg-[#fb7185]",
-      textMain: "text-white",
-      textSub: "text-[#ffe4e6]",
+      bg: "bg-[#fb7185] dark:bg-rose-600/80",
+      textMain: "text-white dark:text-white",
+      textSub: "text-[#ffe4e6] dark:text-rose-100",
     };
   return {
-    bg: "bg-[#f43f5e]",
-    textMain: "text-white",
-    textSub: "text-[#ffe4e6]",
+    bg: "bg-[#f43f5e] dark:bg-rose-500",
+    textMain: "text-white dark:text-white",
+    textSub: "text-[#ffe4e6] dark:text-rose-100",
   };
 };
 
@@ -406,20 +428,20 @@ const TrendLineChart = ({ data, months }: any) => {
   const colors = ["#6366f1", "#0ea5e9", "#10b981", "#f59e0b", "#ef4444"];
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 mb-6">
+    <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700 shadow-sm p-6 mb-6 transition-colors">
       <div className="mb-4 flex justify-between items-start">
         <div>
-          <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2">
+          <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
             แนวโน้มปัญหาแบ่งตามกลุ่มอุปกรณ์ (Product Type Trend)
           </h3>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             ตัวเลขบนกราฟแสดงจำนวน Call
             และเปอร์เซ็นต์แนวโน้มเทียบกับเดือนที่ผ่านมา (
             <span className="text-emerald-500 font-bold">สีเขียว=ลดลง</span>,{" "}
             <span className="text-rose-500 font-bold">สีแดง=เพิ่มขึ้น</span>)
           </p>
         </div>
-        <div className="bg-indigo-50 p-2 rounded-lg text-indigo-500">
+        <div className="bg-indigo-50 dark:bg-indigo-900/30 p-2 rounded-lg text-indigo-500 dark:text-indigo-400">
           <TrendingUp className="w-6 h-6" />
         </div>
       </div>
@@ -438,7 +460,8 @@ const TrendLineChart = ({ data, months }: any) => {
                 y1={y}
                 x2={width - padding.right}
                 y2={y}
-                stroke="#f1f5f9"
+                stroke="currentColor"
+                className="text-slate-100 dark:text-slate-700"
                 strokeDasharray="4,4"
               />
             );
@@ -453,7 +476,8 @@ const TrendLineChart = ({ data, months }: any) => {
                 y={y + 5}
                 textAnchor="end"
                 fontSize="14"
-                fill="#64748b"
+                fill="currentColor"
+                className="text-slate-500 dark:text-slate-400"
                 fontWeight="bold"
               >
                 {val.toLocaleString()}
@@ -488,17 +512,22 @@ const TrendLineChart = ({ data, months }: any) => {
                 const val = prod?.monthly?.[mIdx] || 0;
                 const prev = mIdx > 0 ? prod?.monthly?.[mIdx - 1] : null;
                 let pctText = "",
-                  pctColor = "#64748b";
+                  pctColor = "currentColor";
+                let pctClass = "text-slate-500 dark:text-slate-400";
 
                 if (mIdx > 0 && prev !== null) {
                   if (prev > 0) {
                     const pct = ((val - prev) / prev) * 100;
                     pctText = `${pct > 0 ? "+" : ""}${pct.toFixed(1)}%`;
-                    pctColor =
-                      pct > 0 ? "#ef4444" : pct < 0 ? "#10b981" : "#64748b";
+                    pctClass =
+                      pct > 0
+                        ? "text-rose-500 dark:text-rose-400"
+                        : pct < 0
+                        ? "text-emerald-500 dark:text-emerald-400"
+                        : "text-slate-500 dark:text-slate-400";
                   } else if (val > 0) {
                     pctText = "+100.0%";
-                    pctColor = "#ef4444";
+                    pctClass = "text-rose-500 dark:text-rose-400";
                   }
                 }
                 return {
@@ -509,6 +538,7 @@ const TrendLineChart = ({ data, months }: any) => {
                   color: colors[pIdx % colors.length],
                   pctText,
                   pctColor,
+                  pctClass,
                   labelY: getY(val),
                   placement: "above",
                 };
@@ -569,7 +599,8 @@ const TrendLineChart = ({ data, months }: any) => {
                         cx={cx}
                         cy={lbl.y}
                         r="6"
-                        fill="#fff"
+                        fill="currentColor"
+                        className="text-white dark:text-slate-800"
                         stroke={lbl.color}
                         strokeWidth="3"
                       />
@@ -580,11 +611,15 @@ const TrendLineChart = ({ data, months }: any) => {
                           width={textWidth}
                           height={30}
                           rx="8"
-                          fill="#ffffff"
+                          fill="currentColor"
+                          className="text-white dark:text-slate-700 shadow-sm"
                           fillOpacity="0.95"
-                          stroke="#e2e8f0"
+                          stroke="currentColor"
                           strokeWidth="1.5"
-                          className="shadow-sm"
+                          style={{
+                            stroke:
+                              "var(--tw-border-opacity, 1) rgba(226, 232, 240, 1)",
+                          }} // Fallback light mode border
                         />
                         <text
                           x="0"
@@ -592,7 +627,8 @@ const TrendLineChart = ({ data, months }: any) => {
                           textAnchor="middle"
                           fontSize="13"
                           fontWeight="bold"
-                          fill="#1e293b"
+                          fill="currentColor"
+                          className="text-slate-800 dark:text-slate-100"
                         >
                           {lbl.val.toLocaleString()}
                         </text>
@@ -603,7 +639,8 @@ const TrendLineChart = ({ data, months }: any) => {
                             textAnchor="middle"
                             fontSize="11"
                             fontWeight="extrabold"
-                            fill={lbl.pctColor}
+                            fill="currentColor"
+                            className={lbl.pctClass}
                           >
                             {lbl.pctText}
                           </text>
@@ -614,7 +651,8 @@ const TrendLineChart = ({ data, months }: any) => {
                             textAnchor="middle"
                             fontSize="10"
                             fontWeight="bold"
-                            fill="#94a3b8"
+                            fill="currentColor"
+                            className="text-slate-400 dark:text-slate-500"
                           >
                             -
                           </text>
@@ -636,19 +674,20 @@ const TrendLineChart = ({ data, months }: any) => {
                 textAnchor="middle"
                 fontSize="15"
                 fontWeight="bold"
-                fill="#1e293b"
+                fill="currentColor"
+                className="text-slate-800 dark:text-slate-200"
               >{`${thMonth.m} ${thMonth.y}`}</text>
             );
           })}
         </svg>
       </div>
-      <div className="flex flex-wrap justify-center gap-8 mt-6 pt-5 border-t border-slate-100">
+      <div className="flex flex-wrap justify-center gap-8 mt-6 pt-5 border-t border-slate-100 dark:border-slate-700">
         {data.map((prod: any, idx: any) => {
           if (!prod) return null;
           return (
             <div
               key={`leg-${idx}`}
-              className="flex items-center gap-3 text-sm font-extrabold text-slate-600"
+              className="flex items-center gap-3 text-sm font-extrabold text-slate-600 dark:text-slate-300"
             >
               <span
                 className="w-4 h-4 rounded-full shadow-sm"
@@ -706,24 +745,28 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
   );
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 w-full flex flex-col">
+    <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700 shadow-sm p-6 w-full flex flex-col transition-colors">
       <div className="flex justify-between items-start mb-5">
         <div>
-          <h4 className="font-bold text-slate-800 text-base">{title}</h4>
-          <p className="text-sm text-slate-500 mt-1">{subtitle}</p>
+          <h4 className="font-bold text-slate-800 dark:text-slate-100 text-base">
+            {title}
+          </h4>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+            {subtitle}
+          </p>
         </div>
-        <div className="bg-rose-50 p-2.5 rounded-lg text-rose-500">
+        <div className="bg-rose-50 dark:bg-rose-900/30 p-2.5 rounded-lg text-rose-500 dark:text-rose-400">
           {Icon && <Icon className="w-6 h-6" />}
         </div>
       </div>
       <div className="flex justify-center gap-6 text-sm font-bold mb-5">
-        <span className="flex items-center gap-2 text-indigo-600">
-          <span className="w-3.5 h-3.5 bg-indigo-600 rounded-sm"></span> จำนวน
-          (Count)
+        <span className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
+          <span className="w-3.5 h-3.5 bg-indigo-600 dark:bg-indigo-400 rounded-sm"></span>{" "}
+          จำนวน (Count)
         </span>
-        <span className="flex items-center gap-2 text-rose-500">
-          <span className="w-3.5 h-3.5 bg-rose-500 rounded-full"></span> สะสม
-          (Cumulative %)
+        <span className="flex items-center gap-2 text-rose-500 dark:text-rose-400">
+          <span className="w-3.5 h-3.5 bg-rose-500 dark:bg-rose-400 rounded-full"></span>{" "}
+          สะสม (Cumulative %)
         </span>
       </div>
       <div className="flex-1 w-full relative">
@@ -740,7 +783,8 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
                 y1={y}
                 x2={width - padding.right}
                 y2={y}
-                stroke="#f1f5f9"
+                stroke="currentColor"
+                className="text-slate-100 dark:text-slate-700"
                 strokeDasharray="3,3"
               />
             );
@@ -757,16 +801,17 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
                   y={y}
                   width={barWidth}
                   height={h}
-                  fill="#4f46e5"
+                  fill="currentColor"
                   rx="4"
-                  className="transition-all duration-300 hover:fill-indigo-500"
+                  className="text-indigo-600 dark:text-indigo-500 transition-all duration-300 hover:text-indigo-500 dark:hover:text-indigo-400"
                 />
                 <text
                   x={getX(i)}
                   y={padding.top + innerHeight + 18}
                   textAnchor="end"
                   fontSize="12"
-                  fill="#64748b"
+                  fill="currentColor"
+                  className="text-slate-500 dark:text-slate-400"
                   transform={`rotate(-40 ${getX(i)},${
                     padding.top + innerHeight + 18
                   })`}
@@ -782,7 +827,8 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
           })}
           <polyline
             fill="none"
-            stroke="#f43f5e"
+            stroke="currentColor"
+            className="text-rose-500 dark:text-rose-400"
             strokeWidth="3"
             points={linePoints}
           />
@@ -796,7 +842,8 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
                   textAnchor="middle"
                   fontSize="12"
                   fontWeight="extrabold"
-                  stroke="#ffffff"
+                  stroke="currentColor"
+                  className="text-white dark:text-slate-800"
                   strokeWidth="3.5"
                   strokeLinejoin="round"
                 >
@@ -808,7 +855,8 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
                   textAnchor="middle"
                   fontSize="12"
                   fontWeight="extrabold"
-                  fill="#e11d48"
+                  fill="currentColor"
+                  className="text-rose-600 dark:text-rose-400"
                 >
                   {(d?.cumPercent || 0).toFixed(1)}%
                 </text>
@@ -816,8 +864,12 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
                   cx={getX(i)}
                   cy={getRightY(d?.cumPercent || 0)}
                   r="5"
-                  fill="#fff"
-                  stroke="#f43f5e"
+                  fill="currentColor"
+                  className="text-white dark:text-slate-800"
+                  stroke="currentColor"
+                  style={{
+                    stroke: "var(--tw-text-opacity, 1) rgba(244, 63, 94, 1)",
+                  }} // Fallback rose-500
                   strokeWidth="2.5"
                 />
               </g>
@@ -833,7 +885,8 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
                 y={y + 5}
                 textAnchor="end"
                 fontSize="13"
-                fill="#64748b"
+                fill="currentColor"
+                className="text-slate-500 dark:text-slate-400"
                 fontWeight="bold"
               >
                 {val.toLocaleString()}
@@ -850,7 +903,8 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
                 y={y + 5}
                 textAnchor="start"
                 fontSize="13"
-                fill="#64748b"
+                fill="currentColor"
+                className="text-slate-500 dark:text-slate-400"
                 fontWeight="bold"
               >
                 {val}%
@@ -873,7 +927,7 @@ const Sparkline = ({ data, forecast }: any) => {
 
   let forecastTrend = 0,
     trendText = "",
-    trendColorClass = "text-slate-400",
+    trendColorClass = "text-slate-400 dark:text-slate-500",
     strokeColor = "#94a3b8";
 
   if (forecast !== undefined && len >= 2) {
@@ -884,19 +938,19 @@ const Sparkline = ({ data, forecast }: any) => {
 
     if (forecastTrend > 0) {
       trendText = `+${forecastTrend.toFixed(1)}%`;
-      trendColorClass = "text-[#e11d48]";
-      strokeColor = "#e11d48";
+      trendColorClass = "text-rose-600 dark:text-rose-500";
+      strokeColor = "currentColor"; // Will inherit from parent class
     } else if (forecastTrend < 0) {
       trendText = `${forecastTrend.toFixed(1)}%`;
-      trendColorClass = "text-[#10b981]";
-      strokeColor = "#10b981";
+      trendColorClass = "text-emerald-500 dark:text-emerald-400";
+      strokeColor = "currentColor";
     } else {
       trendText = `0.0%`;
-      trendColorClass = "text-slate-400";
-      strokeColor = "#94a3b8";
+      trendColorClass = "text-slate-400 dark:text-slate-500";
+      strokeColor = "currentColor";
     }
   } else {
-    strokeColor = "#ef4444";
+    strokeColor = "currentColor";
   }
 
   const mainPointsArr = data.slice(0, len - 1).map((val: any, i: any) => ({
@@ -930,7 +984,17 @@ const Sparkline = ({ data, forecast }: any) => {
           {trendText}
         </div>
       )}
-      <svg width={width} height={height} className="overflow-visible mx-auto">
+      <svg
+        width={width}
+        height={height}
+        className={`overflow-visible mx-auto ${
+          forecastTrend > 0
+            ? "text-rose-600 dark:text-rose-500"
+            : forecastTrend < 0
+            ? "text-emerald-500 dark:text-emerald-400"
+            : "text-slate-400 dark:text-slate-500"
+        }`}
+      >
         {len > 1 && (
           <polyline
             fill="none"
@@ -958,8 +1022,10 @@ const Sparkline = ({ data, forecast }: any) => {
             cx={p.x}
             cy={p.y}
             r="4"
-            fill="#fff"
-            stroke={strokeColor}
+            fill="currentColor"
+            stroke="currentColor"
+            className="text-white dark:text-slate-800"
+            style={{ stroke: strokeColor }}
             strokeWidth="2.5"
           />
         ))}
@@ -967,10 +1033,11 @@ const Sparkline = ({ data, forecast }: any) => {
           cx={lastX}
           cy={lastY}
           r="5.5"
-          fill={strokeColor}
-          stroke="#fff"
+          fill="currentColor"
+          stroke="currentColor"
+          className="text-white dark:text-slate-800 drop-shadow-sm"
+          style={{ fill: strokeColor }}
           strokeWidth="2"
-          className="drop-shadow-sm"
         />
       </svg>
     </div>
@@ -1024,8 +1091,8 @@ const MonthlyWorkloadChart = ({ data }: any) => {
             <path
               key={`bar-${i}`}
               d={path}
-              fill="#6366f1"
-              className="transition-all duration-300 hover:fill-indigo-500"
+              fill="currentColor"
+              className="text-indigo-500 dark:text-indigo-600 transition-all duration-300 hover:text-indigo-400 dark:hover:text-indigo-500"
             />
           );
         })}
@@ -1035,11 +1102,11 @@ const MonthlyWorkloadChart = ({ data }: any) => {
           <path
             d={pathData}
             fill="none"
-            stroke="#f59e0b"
+            stroke="currentColor"
+            className="text-amber-500 dark:text-amber-400 drop-shadow-md"
             strokeWidth="4"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="drop-shadow-md"
           />
         )}
 
@@ -1054,10 +1121,13 @@ const MonthlyWorkloadChart = ({ data }: any) => {
                 cx={x}
                 cy={y}
                 r="6"
-                fill="#fff"
-                stroke="#f59e0b"
+                fill="currentColor"
+                stroke="currentColor"
+                className="text-white dark:text-slate-800 drop-shadow-sm"
+                style={{
+                  stroke: "var(--tw-text-opacity, 1) rgba(245, 158, 11, 1)",
+                }}
                 strokeWidth="3.5"
-                className="drop-shadow-sm"
               />
               {/* Text Outline for readability */}
               <text
@@ -1066,7 +1136,8 @@ const MonthlyWorkloadChart = ({ data }: any) => {
                 textAnchor="middle"
                 fontSize="16"
                 fontWeight="900"
-                stroke="#fff"
+                stroke="currentColor"
+                className="text-white dark:text-slate-800"
                 strokeWidth="4"
                 strokeLinejoin="round"
               >
@@ -1078,7 +1149,8 @@ const MonthlyWorkloadChart = ({ data }: any) => {
                 textAnchor="middle"
                 fontSize="16"
                 fontWeight="900"
-                fill="#1e293b"
+                fill="currentColor"
+                className="text-slate-800 dark:text-slate-100"
               >
                 {d.total.toLocaleString()}
               </text>
@@ -1087,7 +1159,8 @@ const MonthlyWorkloadChart = ({ data }: any) => {
                   textAnchor="middle"
                   fontSize="14"
                   fontWeight="bold"
-                  fill="#334155"
+                  fill="currentColor"
+                  className="text-slate-700 dark:text-slate-300"
                 >
                   {thDate.m}
                 </text>
@@ -1096,7 +1169,8 @@ const MonthlyWorkloadChart = ({ data }: any) => {
                   y="18"
                   fontSize="12"
                   fontWeight="bold"
-                  fill="#94a3b8"
+                  fill="currentColor"
+                  className="text-slate-400 dark:text-slate-500"
                 >
                   {thDate.y}
                 </text>
@@ -1150,17 +1224,19 @@ const SearchableDropdown = ({
     ? selectedValues[0]
     : `เลือกแล้ว ${selectedValues.length} รายการ`;
   const baseClass = isHighlight
-    ? "bg-indigo-50 border-indigo-200 text-indigo-900 hover:bg-indigo-100"
-    : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100";
+    ? "bg-indigo-50 dark:bg-indigo-900/40 border-indigo-200 dark:border-indigo-800 text-indigo-900 dark:text-indigo-200 hover:bg-indigo-100 dark:hover:bg-indigo-900/60"
+    : "bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700";
 
   return (
     <div className="relative text-left" ref={dropdownRef}>
-      <label className="block text-sm font-extrabold text-slate-500 uppercase mb-2 truncate">
+      <label className="block text-sm font-extrabold text-slate-500 dark:text-slate-400 uppercase mb-2 truncate">
         {label}
       </label>
       <div
         className={`w-full text-sm font-bold border rounded-xl p-3 outline-none cursor-pointer flex justify-between items-center transition-colors shadow-sm ${baseClass} ${
-          !isAllSelected ? "ring-2 ring-indigo-400 ring-offset-1" : ""
+          !isAllSelected
+            ? "ring-2 ring-indigo-400 dark:ring-indigo-500 ring-offset-1 dark:ring-offset-slate-900"
+            : ""
         }`}
         onClick={() => {
           setIsOpen(!isOpen);
@@ -1172,12 +1248,12 @@ const SearchableDropdown = ({
       </div>
 
       {isOpen && (
-        <div className="absolute left-0 z-50 w-full mt-2 bg-white border border-slate-200 rounded-xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden">
-          <div className="p-3 border-b border-slate-100 bg-[#f8fafc] flex items-center gap-3">
-            <Search className="w-4 h-4 text-indigo-500 flex-shrink-0 ml-1" />
+        <div className="absolute left-0 z-50 w-full mt-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-[0_10px_25px_-5px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden">
+          <div className="p-3 border-b border-slate-100 dark:border-slate-700 bg-[#f8fafc] dark:bg-slate-800/90 flex items-center gap-3">
+            <Search className="w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0 ml-1" />
             <input
               type="text"
-              className="w-full text-sm bg-transparent outline-none py-1.5 placeholder-slate-400 font-bold text-slate-700"
+              className="w-full text-sm bg-transparent outline-none py-1.5 placeholder-slate-400 dark:placeholder-slate-500 font-bold text-slate-700 dark:text-slate-200"
               placeholder="พิมพ์คำค้นหา..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -1189,8 +1265,8 @@ const SearchableDropdown = ({
             <div
               className={`px-4 py-3.5 text-sm cursor-pointer transition-colors flex items-center gap-3 ${
                 isAllSelected
-                  ? "bg-indigo-50 text-indigo-700 font-bold"
-                  : "text-slate-700 font-semibold hover:bg-slate-50"
+                  ? "bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-bold"
+                  : "text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-50 dark:hover:bg-slate-700/50"
               }`}
               onClick={selectAll}
             >
@@ -1208,10 +1284,10 @@ const SearchableDropdown = ({
                 return (
                   <div
                     key={opt}
-                    className={`px-4 py-3.5 text-sm cursor-pointer transition-colors border-t border-slate-50 flex items-center gap-3 ${
+                    className={`px-4 py-3.5 text-sm cursor-pointer transition-colors border-t border-slate-50 dark:border-slate-700 flex items-center gap-3 ${
                       isSelected
-                        ? "bg-indigo-50 text-indigo-700 font-bold"
-                        : "text-slate-700 font-medium hover:bg-slate-50"
+                        ? "bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-bold"
+                        : "text-slate-700 dark:text-slate-300 font-medium hover:bg-slate-50 dark:hover:bg-slate-700/50"
                     }`}
                     onClick={() => toggleOption(opt)}
                     title={opt}
@@ -1227,7 +1303,7 @@ const SearchableDropdown = ({
                 );
               })
             ) : (
-              <div className="px-4 py-6 text-sm text-slate-400 text-center font-bold">
+              <div className="px-4 py-6 text-sm text-slate-400 dark:text-slate-500 text-center font-bold">
                 ไม่พบคำว่า "{searchTerm}"
               </div>
             )}
@@ -1247,6 +1323,9 @@ export default function App() {
   const [fileName, setFileName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [loadError, setLoadError] = useState("");
+
+  // Theme state
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const [sheetUrl, setSheetUrl] = useState(DEFAULT_SHEET_URL);
 
@@ -1311,8 +1390,26 @@ export default function App() {
     sec8: true,
   });
 
+  // ✨ โหลดสคริปต์ Tailwind CSS พร้อมตั้งค่า Dark Mode
   useEffect(() => {
     if (typeof window !== "undefined") {
+      // ตรวจสอบ Theme เริ่มต้น
+      const checkTheme = () => {
+        if (
+          localStorage.getItem("theme") === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+          setIsDarkMode(true);
+        } else {
+          document.documentElement.classList.remove("dark");
+          setIsDarkMode(false);
+        }
+      };
+
+      checkTheme();
+
       // ตรวจสอบว่ามี script tailwind หรือยัง
       if (
         document.getElementById("tailwind-script") ||
@@ -1321,6 +1418,14 @@ export default function App() {
         setIsTailwindLoaded(true);
         return;
       }
+
+      // Inject Anti-Flicker Script & Config
+      const style = document.createElement("style");
+      style.type = "text/tailwindcss";
+      style.innerHTML = `
+        @custom-variant dark (&:where(.dark, .dark *));
+      `;
+      document.head.appendChild(style);
 
       const script = document.createElement("script");
       script.id = "tailwind-script";
@@ -1331,6 +1436,18 @@ export default function App() {
       document.head.appendChild(script);
     }
   }, []);
+
+  const toggleTheme = () => {
+    if (isDarkMode) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setIsDarkMode(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setIsDarkMode(true);
+    }
+  };
 
   const toggleSection = (sec: any) =>
     setOpenSections((prev: any) => ({ ...prev, [sec]: !prev[sec] }));
@@ -2044,9 +2161,9 @@ export default function App() {
   const topIssuesKPI = useMemo(() => {
     if (!isDataLoaded || chartAggregatedData.systems.length === 0) return [];
     const colors = [
-      "border-l-4 border-indigo-600 text-indigo-700",
-      "border-l-4 border-sky-500 text-sky-600",
-      "border-l-4 border-rose-500 text-rose-600",
+      "border-l-4 border-indigo-600 text-indigo-700 dark:border-indigo-500 dark:text-indigo-400",
+      "border-l-4 border-sky-500 text-sky-600 dark:border-sky-400 dark:text-sky-400",
+      "border-l-4 border-rose-500 text-rose-600 dark:border-rose-400 dark:text-rose-400",
     ];
     return chartAggregatedData.systems
       .slice(0, 3)
@@ -2220,26 +2337,26 @@ export default function App() {
     return (
       <div
         key={tableDef.id}
-        className="bg-white rounded-2xl border border-slate-200/85 shadow-sm overflow-hidden text-left"
+        className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/85 dark:border-slate-700 shadow-sm overflow-hidden text-left transition-colors"
       >
         <button
           onClick={() => toggleSection(tableDef.id)}
-          className="w-full px-6 py-5 bg-slate-50 border-b border-slate-100 hover:bg-slate-100/60 flex justify-between items-center transition-all"
+          className="w-full px-6 py-5 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-100 dark:border-slate-700 hover:bg-slate-100/60 dark:hover:bg-slate-700/50 flex justify-between items-center transition-all"
         >
-          <span className="text-base font-extrabold text-slate-800 flex items-center gap-3">
-            <span className="w-8 h-8 bg-indigo-100 text-indigo-700 text-sm font-black flex items-center justify-center rounded-lg shadow-sm">
+          <span className="text-base font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-3">
+            <span className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-sm font-black flex items-center justify-center rounded-lg shadow-sm">
               {tableDef.num}
             </span>
             {tableDef.title}
           </span>
           <div className="flex items-center gap-3">
-            <span className="text-sm bg-indigo-50 text-indigo-700 font-extrabold px-4 py-1.5 rounded-lg border border-indigo-100">
+            <span className="text-sm bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 font-extrabold px-4 py-1.5 rounded-lg border border-indigo-100 dark:border-indigo-800">
               {(tableDef.data || []).length} รายการ
             </span>
             {openSections[tableDef.id] ? (
-              <ChevronUp className="w-5 h-5 text-slate-400" />
+              <ChevronUp className="w-5 h-5 text-slate-400 dark:text-slate-500" />
             ) : (
-              <ChevronDown className="w-5 h-5 text-slate-400" />
+              <ChevronDown className="w-5 h-5 text-slate-400 dark:text-slate-500" />
             )}
           </div>
         </button>
@@ -2247,12 +2364,12 @@ export default function App() {
         {openSections[tableDef.id] && (
           <div className="overflow-x-auto max-h-[600px] custom-scrollbar relative">
             <table className="w-full text-left border-collapse whitespace-nowrap">
-              <thead className="sticky top-0 z-20 bg-[#f8fafc] shadow-sm">
-                <tr className="text-sm font-extrabold text-[#1e3a8a] border-b border-slate-200 align-bottom">
-                  <th className="px-6 py-5 sticky left-0 z-30 bg-[#f8fafc] border-r border-slate-200 w-1/4 min-w-[250px] text-left">
+              <thead className="sticky top-0 z-20 bg-[#f8fafc] dark:bg-slate-800 shadow-sm">
+                <tr className="text-sm font-extrabold text-[#1e3a8a] dark:text-indigo-300 border-b border-slate-200 dark:border-slate-700 align-bottom">
+                  <th className="px-6 py-5 sticky left-0 z-30 bg-[#f8fafc] dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 w-1/4 min-w-[250px] text-left">
                     รายการวิเคราะห์
                   </th>
-                  <th className="px-4 py-5 border-r border-slate-200 min-w-[120px]">
+                  <th className="px-4 py-5 border-r border-slate-200 dark:border-slate-700 min-w-[120px]">
                     <div className="flex items-center justify-center gap-1.5 h-full">
                       <span className="whitespace-nowrap">รวม CALLS</span>
                     </div>
@@ -2265,41 +2382,24 @@ export default function App() {
                         className="px-2 py-5 min-w-[70px] text-center leading-tight"
                       >
                         <div className="text-base">{thDate.m}</div>
-                        <div className="text-xs mt-1 text-slate-500">
+                        <div className="text-xs mt-1 text-slate-500 dark:text-slate-400">
                           {thDate.y}
                         </div>
                       </th>
                     );
                   })}
-                  <th className="px-3 py-5 border-l border-slate-200 min-w-[100px] text-center leading-tight whitespace-pre-line">
+                  <th className="px-3 py-5 border-l border-slate-200 dark:border-slate-700 min-w-[100px] text-center leading-tight whitespace-pre-line">
                     {getTrendHeader()}
                   </th>
-                  {dynamicLists.months.map((m: any) => {
-                    const thDate = formatMonthThaiSplit(m);
-                    return (
-                      <th
-                        key={m}
-                        className="px-2 py-4 min-w-[70px] text-center leading-tight"
-                      >
-                        <div className="text-[13px]">{thDate.m}</div>
-                        <div className="text-[11px] mt-0.5 text-slate-500">
-                          {thDate.y}
-                        </div>
-                      </th>
-                    );
-                  })}
-                  <th className="px-2 py-4 border-l border-slate-200 min-w-[80px] text-center leading-tight whitespace-pre-line">
-                    <div className="text-[12px]">{getTrendHeader()}</div>
-                  </th>
-                  <th className="px-3 py-4 bg-indigo-50/40 border-l border-slate-200 min-w-[100px] text-center leading-tight text-[#1e3a8a] font-extrabold">
+                  <th className="px-3 py-4 bg-indigo-50/40 dark:bg-indigo-900/20 border-l border-slate-200 dark:border-slate-700 min-w-[100px] text-center leading-tight text-[#1e3a8a] dark:text-indigo-300 font-extrabold">
                     <div className="text-[13px]">ประมาณการ</div>
-                    <div className="text-[10px] font-semibold text-indigo-600 mt-0.5">
+                    <div className="text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">
                       {dynamicLists.months.length > 0
                         ? `(หาร ${latestMonthMaxDay} วัน * 30)`
                         : ""}
                     </div>
                   </th>
-                  <th className="px-4 py-4 border-l border-slate-200 min-w-[150px] text-center">
+                  <th className="px-4 py-4 border-l border-slate-200 dark:border-slate-700 min-w-[150px] text-center">
                     กราฟประมาณการ
                   </th>
                 </tr>
@@ -2315,8 +2415,10 @@ export default function App() {
                     return (
                       <tr
                         key={idx}
-                        className={`border-b border-slate-100 hover:bg-indigo-50/50 transition-all cursor-pointer group ${
-                          isCrossFiltered ? "bg-indigo-50/40 font-bold" : ""
+                        className={`border-b border-slate-100 dark:border-slate-700/50 hover:bg-indigo-50/50 dark:hover:bg-slate-700/50 transition-all cursor-pointer group ${
+                          isCrossFiltered
+                            ? "bg-indigo-50/40 dark:bg-indigo-900/30 font-bold"
+                            : ""
                         }`}
                         onClick={() => {
                           setCrossFilters((prev: any) => {
@@ -2332,25 +2434,25 @@ export default function App() {
                         }}
                       >
                         <td
-                          className={`px-6 py-4 font-bold sticky left-0 z-10 border-r border-slate-100 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] truncate max-w-[300px] transition-colors ${
+                          className={`px-6 py-4 font-bold sticky left-0 z-10 border-r border-slate-100 dark:border-slate-700/50 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] truncate max-w-[300px] transition-colors ${
                             isCrossFiltered
-                              ? "bg-indigo-50 border-l-4 border-l-indigo-600 text-indigo-700"
-                              : "bg-white text-slate-800"
+                              ? "bg-indigo-50 dark:bg-slate-800 border-l-4 border-l-indigo-600 dark:border-l-indigo-500 text-indigo-700 dark:text-indigo-400"
+                              : "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200"
                           }`}
                           title={row?.name}
                         >
                           <div className="flex items-center gap-3 text-[14px]">
                             {isCrossFiltered && (
-                              <span className="w-2.5 h-2.5 bg-indigo-600 rounded-full animate-pulse flex-shrink-0"></span>
+                              <span className="w-2.5 h-2.5 bg-indigo-600 dark:bg-indigo-500 rounded-full animate-pulse flex-shrink-0"></span>
                             )}
                             <span className="truncate">{row?.name}</span>
                           </div>
                         </td>
-                        <td className="px-4 py-5 text-center bg-transparent border-r border-slate-100 relative">
-                          <div className="font-extrabold text-xl text-[#1e3a8a] leading-tight">
+                        <td className="px-4 py-5 text-center bg-transparent border-r border-slate-100 dark:border-slate-700/50 relative">
+                          <div className="font-extrabold text-xl text-[#1e3a8a] dark:text-indigo-300 leading-tight">
                             {(row?.total || 0).toLocaleString()}
                           </div>
-                          <div className="font-bold text-sm text-indigo-600 mt-1">
+                          <div className="font-bold text-sm text-indigo-600 dark:text-indigo-400 mt-1">
                             ({row?.percentage || 0}%)
                           </div>
                         </td>
@@ -2365,7 +2467,7 @@ export default function App() {
                                 key={mIdx}
                                 className={`px-2 py-4 text-center transition-colors ${
                                   isCrossFiltered && detail?.calls > 0
-                                    ? "bg-[#fda4af]"
+                                    ? "bg-[#fda4af] dark:bg-rose-800/60"
                                     : colors.bg
                                 }`}
                               >
@@ -2374,7 +2476,7 @@ export default function App() {
                                     <div
                                       className={`font-extrabold text-[14px] leading-none ${
                                         isCrossFiltered
-                                          ? "text-[#881337]"
+                                          ? "text-[#881337] dark:text-rose-100"
                                           : colors.textMain
                                       }`}
                                     >
@@ -2383,7 +2485,7 @@ export default function App() {
                                     <div
                                       className={`font-medium text-[11px] mt-1.5 ${
                                         isCrossFiltered
-                                          ? "text-[#be123c]"
+                                          ? "text-[#be123c] dark:text-rose-300"
                                           : colors.textSub
                                       }`}
                                     >
@@ -2391,32 +2493,34 @@ export default function App() {
                                     </div>
                                   </>
                                 ) : (
-                                  <div className="text-slate-300">-</div>
+                                  <div className="text-slate-300 dark:text-slate-600">
+                                    -
+                                  </div>
                                 )}
                               </td>
                             );
                           }
                         )}
-                        <td className="px-2 py-4 text-center font-extrabold text-[13px] bg-transparent border-l border-slate-100">
+                        <td className="px-2 py-4 text-center font-extrabold text-[13px] bg-transparent border-l border-slate-100 dark:border-slate-700/50">
                           <div
                             className={`${
                               (row?.trend || 0) > 0
-                                ? "text-[#e11d48]"
+                                ? "text-[#e11d48] dark:text-rose-400"
                                 : (row?.trend || 0) < 0
-                                ? "text-emerald-600"
-                                : "text-slate-400"
+                                ? "text-emerald-600 dark:text-emerald-400"
+                                : "text-slate-400 dark:text-slate-500"
                             }`}
                           >
                             {(row?.trend || 0) > 0 ? "+" : ""}
                             {(row?.trend || 0).toFixed(2)}%
                           </div>
                         </td>
-                        <td className="px-3 py-4 text-center bg-transparent border-l border-slate-100">
-                          <div className="font-extrabold text-[16px] text-indigo-700">
+                        <td className="px-3 py-4 text-center bg-transparent border-l border-slate-100 dark:border-slate-700/50">
+                          <div className="font-extrabold text-[16px] text-indigo-700 dark:text-indigo-400">
                             {(row?.forecast || 0).toLocaleString()}
                           </div>
                         </td>
-                        <td className="px-4 py-3 text-center bg-transparent border-l border-slate-100 align-middle">
+                        <td className="px-4 py-3 text-center bg-transparent border-l border-slate-100 dark:border-slate-700/50 align-middle">
                           <Sparkline
                             data={row?.monthly || []}
                             forecast={row?.forecast || 0}
@@ -2437,22 +2541,22 @@ export default function App() {
                 )}
               </tbody>
               {(tableDef.data || []).length > 0 && (
-                <tfoot className="sticky bottom-0 z-30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] outline outline-1 outline-indigo-200 bg-[#eff6ff] print:static">
+                <tfoot className="sticky bottom-0 z-30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] outline outline-1 outline-indigo-200 dark:outline-slate-700 bg-[#eff6ff] dark:bg-slate-900 print:static">
                   <tr>
-                    <td className="px-6 py-4 font-black text-indigo-900 sticky left-0 z-40 bg-[#eff6ff] border-r border-indigo-200 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] text-[14px] print:static">
+                    <td className="px-6 py-4 font-black text-indigo-900 dark:text-indigo-300 sticky left-0 z-40 bg-[#eff6ff] dark:bg-slate-900 border-r border-indigo-200 dark:border-slate-700 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] text-[14px] print:static">
                       Grand Total (รวมทั้งหมด)
                     </td>
-                    <td className="px-4 py-4 text-center border-r border-indigo-200">
-                      <div className="font-black text-xl text-indigo-900">
+                    <td className="px-4 py-4 text-center border-r border-indigo-200 dark:border-slate-700">
+                      <div className="font-black text-xl text-indigo-900 dark:text-indigo-300">
                         {(grandTotal || 0).toLocaleString()}
                       </div>
-                      <div className="font-bold text-sm text-indigo-600 mt-1">
+                      <div className="font-bold text-sm text-indigo-600 dark:text-indigo-500 mt-1">
                         100%
                       </div>
                     </td>
                     {grandMonthly.map((val, mIdx) => {
                       let pctText = null;
-                      let pctColor = "text-slate-400";
+                      let pctColor = "text-slate-400 dark:text-slate-500";
                       if (mIdx > 0) {
                         const prev = grandMonthly[mIdx - 1];
                         if (prev > 0) {
@@ -2460,21 +2564,21 @@ export default function App() {
                           pctText = `${pct > 0 ? "+" : ""}${pct.toFixed(2)}%`;
                           pctColor =
                             pct > 0
-                              ? "text-[#e11d48]"
+                              ? "text-[#e11d48] dark:text-rose-400"
                               : pct < 0
-                              ? "text-[#10b981]"
-                              : "text-slate-500";
+                              ? "text-[#10b981] dark:text-emerald-400"
+                              : "text-slate-500 dark:text-slate-400";
                         } else if (val > 0) {
                           pctText = "+100.00%";
-                          pctColor = "text-[#e11d48]";
+                          pctColor = "text-[#e11d48] dark:text-rose-400";
                         }
                       }
                       return (
                         <td
                           key={mIdx}
-                          className="px-2 py-4 text-center border-r border-indigo-200/60 align-middle"
+                          className="px-2 py-4 text-center border-r border-indigo-200/60 dark:border-slate-700 align-middle"
                         >
-                          <div className="font-black text-lg text-indigo-900">
+                          <div className="font-black text-lg text-indigo-900 dark:text-indigo-300">
                             {(val || 0).toLocaleString()}
                           </div>
                           {pctText && (
@@ -2487,26 +2591,26 @@ export default function App() {
                         </td>
                       );
                     })}
-                    <td className="px-2 py-4 text-center border-l border-indigo-200/60 align-middle">
+                    <td className="px-2 py-4 text-center border-l border-indigo-200/60 dark:border-slate-700 align-middle">
                       <div
                         className={`font-black text-[13px] ${
                           grandTrend > 0
-                            ? "text-[#e11d48]"
+                            ? "text-[#e11d48] dark:text-rose-400"
                             : grandTrend < 0
-                            ? "text-emerald-600"
-                            : "text-slate-500"
+                            ? "text-emerald-600 dark:text-emerald-400"
+                            : "text-slate-500 dark:text-slate-400"
                         }`}
                       >
                         {grandTrend > 0 ? "+" : ""}
                         {(grandTrend || 0).toFixed(2)}%
                       </div>
                     </td>
-                    <td className="px-3 py-4 text-center border-l border-indigo-200/60 align-middle">
-                      <div className="font-black text-[16px] text-indigo-900">
+                    <td className="px-3 py-4 text-center border-l border-indigo-200/60 dark:border-slate-700 align-middle">
+                      <div className="font-black text-[16px] text-indigo-900 dark:text-indigo-300">
                         {(grandForecast || 0).toLocaleString()}
                       </div>
                     </td>
-                    <td className="px-4 py-3 border-l border-indigo-200/60 align-middle text-center">
+                    <td className="px-4 py-3 border-l border-indigo-200/60 dark:border-slate-700 align-middle text-center">
                       <Sparkline data={grandMonthly} forecast={grandForecast} />
                     </td>
                   </tr>
@@ -2514,7 +2618,7 @@ export default function App() {
               )}
             </table>
             {hasMore && (
-              <div className="p-4 bg-slate-50/60 border-t border-slate-100 text-center">
+              <div className="p-4 bg-slate-50/60 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-700 text-center">
                 <button
                   onClick={(e: any) => {
                     e.stopPropagation();
@@ -2523,7 +2627,7 @@ export default function App() {
                       [tableDef.id]: (prev[tableDef.id] || 15) + 30,
                     }));
                   }}
-                  className="px-6 py-2 bg-white border border-slate-200 rounded-lg text-sm font-extrabold text-indigo-600 hover:bg-indigo-50 hover:border-indigo-300 transition-all shadow-sm"
+                  className="px-6 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg text-sm font-extrabold text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-700 hover:border-indigo-300 transition-all shadow-sm"
                 >
                   แสดงผลเพิ่มอีก +30 รายการ
                 </button>
@@ -2576,6 +2680,13 @@ export default function App() {
         </h2>
         <style>
           {`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
+          {`
+            @media (prefers-color-scheme: dark) {
+              body { background-color: #0f172a; }
+              div { border-color: #334155; border-top-color: #818cf8; }
+              h2 { color: #cbd5e1; }
+            }
+          `}
         </style>
       </div>
     );
@@ -2584,21 +2695,21 @@ export default function App() {
   if (!isDataLoaded) {
     if (isProcessing) {
       return (
-        <div className="min-h-screen bg-[#f3f7fb] flex flex-col items-center justify-center p-4 text-left">
-          <div className="bg-white p-10 rounded-3xl shadow-xl max-w-md w-full text-center border border-slate-200 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-indigo-100">
-              <div className="bg-indigo-600 h-full w-full animate-[pulse_1.5s_ease-in-out_infinite] origin-left"></div>
+        <div className="min-h-screen bg-[#f3f7fb] dark:bg-slate-900 flex flex-col items-center justify-center p-4 text-left transition-colors">
+          <div className="bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-xl max-w-md w-full text-center border border-slate-200 dark:border-slate-700 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-indigo-100 dark:bg-indigo-900/50">
+              <div className="bg-indigo-600 dark:bg-indigo-500 h-full w-full animate-[pulse_1.5s_ease-in-out_infinite] origin-left"></div>
             </div>
             <div className="relative w-24 h-24 mx-auto mb-6 mt-4">
-              <div className="absolute inset-0 bg-indigo-100 rounded-full animate-ping opacity-70"></div>
-              <div className="relative bg-indigo-600 w-24 h-24 rounded-full flex items-center justify-center shadow-lg">
+              <div className="absolute inset-0 bg-indigo-100 dark:bg-indigo-900/50 rounded-full animate-ping opacity-70"></div>
+              <div className="relative bg-indigo-600 dark:bg-indigo-500 w-24 h-24 rounded-full flex items-center justify-center shadow-lg">
                 <RefreshCw className="w-12 h-12 text-white animate-spin" />
               </div>
             </div>
-            <h1 className="text-3xl font-black text-slate-800 tracking-tight mb-3">
+            <h1 className="text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight mb-3">
               กำลังเตรียมข้อมูล...
             </h1>
-            <p className="text-base text-slate-500 mb-4 leading-relaxed px-4">
+            <p className="text-base text-slate-500 dark:text-slate-400 mb-4 leading-relaxed px-4">
               กำลังเชื่อมต่อและประมวลผล กรุณารอสักครู่...
             </p>
           </div>
@@ -2606,28 +2717,28 @@ export default function App() {
       );
     }
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 text-left">
-        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl max-w-2xl w-full border border-slate-200">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex flex-col items-center justify-center p-4 text-left transition-colors">
+        <div className="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-xl max-w-2xl w-full border border-slate-200 dark:border-slate-700">
           <div className="text-center mb-10">
-            <div className="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
-              <Layers className="w-10 h-10 text-indigo-600" />
+            <div className="w-20 h-20 bg-indigo-100 dark:bg-indigo-900/50 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+              <Layers className="w-10 h-10 text-indigo-600 dark:text-indigo-400" />
             </div>
-            <h1 className="text-3xl font-black text-slate-800 tracking-tight">
+            <h1 className="text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight">
               Call Maintenance Dashboard
             </h1>
-            <p className="text-base text-slate-500 mt-3">
+            <p className="text-base text-slate-500 dark:text-slate-400 mt-3">
               ระบบดึงข้อมูลจาก Google Sheet ล้มเหลว โปรดเลือกวิธีใช้งานด้านล่าง
             </p>
           </div>
 
           {loadError && (
-            <div className="mb-8 p-5 bg-rose-50 border border-rose-200 rounded-2xl flex items-start gap-4 shadow-sm">
-              <AlertTriangle className="w-6 h-6 text-rose-500 flex-shrink-0 mt-0.5" />
+            <div className="mb-8 p-5 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 rounded-2xl flex items-start gap-4 shadow-sm">
+              <AlertTriangle className="w-6 h-6 text-rose-500 dark:text-rose-400 flex-shrink-0 mt-0.5" />
               <div className="text-left">
-                <p className="text-sm font-black text-rose-800 mb-1">
+                <p className="text-sm font-black text-rose-800 dark:text-rose-300 mb-1">
                   สาเหตุที่หน้าเว็บไม่โหลด:
                 </p>
-                <p className="text-sm font-semibold text-rose-700 leading-relaxed">
+                <p className="text-sm font-semibold text-rose-700 dark:text-rose-400 leading-relaxed">
                   {loadError}
                 </p>
               </div>
@@ -2635,12 +2746,12 @@ export default function App() {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center hover:shadow-md transition-all">
-              <UploadCloud className="w-10 h-10 text-slate-400 mx-auto mb-3" />
-              <h3 className="font-bold text-slate-700 mb-2">
+            <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 text-center hover:shadow-md transition-all">
+              <UploadCloud className="w-10 h-10 text-slate-400 dark:text-slate-500 mx-auto mb-3" />
+              <h3 className="font-bold text-slate-700 dark:text-slate-200 mb-2">
                 มีไฟล์ข้อมูลของตัวเอง?
               </h3>
-              <p className="text-xs text-slate-500 mb-4 h-10">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 h-10">
                 อัปโหลดไฟล์ CSV ที่มีโครงสร้างตรงกับระบบ
               </p>
               <input
@@ -2653,21 +2764,21 @@ export default function App() {
               <button
                 onClick={() => fileInputRef.current.click()}
                 disabled={isProcessing}
-                className="w-full py-3 bg-white border border-slate-300 hover:border-slate-500 text-slate-700 rounded-xl font-bold text-sm transition-all"
+                className="w-full py-3 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 hover:border-slate-500 dark:hover:border-slate-400 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm transition-all"
               >
                 เลือกอัปโหลดไฟล์ CSV
               </button>
             </div>
 
-            <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-6 text-center hover:shadow-md transition-all relative overflow-hidden">
+            <div className="bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800/50 rounded-2xl p-6 text-center hover:shadow-md transition-all relative overflow-hidden">
               <div className="absolute -top-3 -right-3 bg-rose-500 text-white text-[10px] font-black px-3 py-1 rounded-full shadow-sm transform rotate-12">
                 แนะนำ!
               </div>
-              <PlayCircle className="w-10 h-10 text-indigo-500 mx-auto mb-3" />
-              <h3 className="font-bold text-indigo-900 mb-2">
+              <PlayCircle className="w-10 h-10 text-indigo-500 dark:text-indigo-400 mx-auto mb-3" />
+              <h3 className="font-bold text-indigo-900 dark:text-indigo-300 mb-2">
                 ยังไม่มีไฟล์? ลองใช้ตัวอย่าง
               </h3>
-              <p className="text-xs text-indigo-600/80 mb-4 h-10">
+              <p className="text-xs text-indigo-600/80 dark:text-indigo-400/80 mb-4 h-10">
                 กดดูหน้าตา Dashboard ใช้งานได้ 100% ด้วยข้อมูลจำลอง
               </p>
               <button
@@ -2704,15 +2815,15 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen bg-[#f3f7fb] text-slate-800 font-sans antialiased pb-12 print:bg-white print:pb-0 text-left">
-      <header className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-950 text-white sticky top-0 z-40 shadow-md print:hidden">
+    <div className="min-h-screen bg-[#f3f7fb] dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans antialiased pb-12 print:bg-white print:pb-0 text-left transition-colors duration-300">
+      <header className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-black text-white sticky top-0 z-40 shadow-md print:hidden transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-4">
-            <div className="bg-indigo-600 p-3 rounded-xl shadow-inner">
+            <div className="bg-indigo-600 dark:bg-indigo-500 p-3 rounded-xl shadow-inner">
               <Layers className="h-7 w-7 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-black tracking-wide">
+              <h1 className="text-2xl font-black tracking-wide text-white">
                 ระบบรายงาน Call MAINTENANCE DASHBOARD
               </h1>
               <div className="flex items-center gap-2 mt-1">
@@ -2720,7 +2831,7 @@ export default function App() {
                   className={`text-xs px-3 py-1 rounded-lg flex items-center gap-1.5 font-bold ${
                     fileName.includes("ตัวอย่าง")
                       ? "bg-amber-500/20 text-amber-300"
-                      : "bg-indigo-800/60 text-indigo-100"
+                      : "bg-indigo-800/60 dark:bg-indigo-900/80 text-indigo-100"
                   }`}
                 >
                   <CheckCircle
@@ -2735,28 +2846,41 @@ export default function App() {
               </div>
             </div>
           </div>
-          <nav className="flex bg-slate-800/80 p-1.5 rounded-2xl border border-slate-700/60 shadow-lg overflow-x-auto">
+          <div className="flex items-center gap-3">
+            <nav className="flex bg-slate-800/80 dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-700/60 dark:border-slate-700 shadow-lg overflow-x-auto">
+              <button
+                onClick={() => setActiveTab("overview")}
+                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
+                  activeTab === "overview"
+                    ? "bg-indigo-600 dark:bg-indigo-500 text-white shadow-md"
+                    : "text-slate-300 hover:text-white"
+                }`}
+              >
+                <BarChart2 className="w-5 h-5" /> ภาพรวม (Overview)
+              </button>
+              <button
+                onClick={() => setActiveTab("settings")}
+                className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
+                  activeTab === "settings"
+                    ? "bg-indigo-600 dark:bg-indigo-500 text-white shadow-md"
+                    : "text-slate-300 hover:text-white"
+                }`}
+              >
+                <Settings className="w-5 h-5" /> ตั้งค่าข้อมูล (Data)
+              </button>
+            </nav>
             <button
-              onClick={() => setActiveTab("overview")}
-              className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
-                activeTab === "overview"
-                  ? "bg-indigo-600 text-white shadow-md"
-                  : "text-slate-300 hover:text-white"
-              }`}
+              onClick={toggleTheme}
+              className="bg-slate-800/80 dark:bg-slate-800 p-3 rounded-2xl border border-slate-700/60 dark:border-slate-700 shadow-lg text-amber-400 dark:text-indigo-300 hover:bg-slate-700 transition-colors"
+              title="Toggle Dark Mode"
             >
-              <BarChart2 className="w-5 h-5" /> ภาพรวม (Overview)
+              {isDarkMode ? (
+                <Sun className="w-6 h-6" />
+              ) : (
+                <Moon className="w-6 h-6" />
+              )}
             </button>
-            <button
-              onClick={() => setActiveTab("settings")}
-              className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 whitespace-nowrap ${
-                activeTab === "settings"
-                  ? "bg-indigo-600 text-white shadow-md"
-                  : "text-slate-300 hover:text-white"
-              }`}
-            >
-              <Settings className="w-5 h-5" /> ตั้งค่าข้อมูล (Data)
-            </button>
-          </nav>
+          </div>
         </div>
       </header>
 
@@ -2764,15 +2888,15 @@ export default function App() {
         {activeTab === "overview" && (
           <>
             {/* ================= FILTERS PANEL ================= */}
-            <section className="bg-white rounded-3xl shadow-sm border border-slate-200/80 p-6 mb-8 transition-all print:hidden">
-              <div className="flex justify-between items-center mb-5 pb-3 border-b border-slate-100">
-                <span className="text-base font-extrabold text-slate-700 flex items-center gap-3">
+            <section className="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-200/80 dark:border-slate-700 p-6 mb-8 transition-colors print:hidden">
+              <div className="flex justify-between items-center mb-5 pb-3 border-b border-slate-100 dark:border-slate-700">
+                <span className="text-base font-extrabold text-slate-700 dark:text-slate-200 flex items-center gap-3">
                   <div className="w-3 h-3 bg-indigo-500 rounded-full"></div>
                   ฟิลเตอร์การเลือกคัดกรองข้อมูลแบบยืดหยุ่น
                 </span>
                 <button
                   onClick={resetFilters}
-                  className="text-sm text-indigo-600 font-extrabold hover:text-indigo-800 flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-xl transition-all"
+                  className="text-sm text-indigo-600 dark:text-indigo-400 font-extrabold hover:text-indigo-800 dark:hover:text-indigo-300 flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 px-4 py-2 rounded-xl transition-all"
                 >
                   <RefreshCw className="w-4 h-4" /> ล้างการเลือกทั้งหมด (Reset)
                 </button>
@@ -2784,11 +2908,11 @@ export default function App() {
 
             <section className="mb-8 text-left">
               <div className="flex items-center gap-3 mb-4">
-                <AlertTriangle className="h-6 w-6 text-indigo-600" />
-                <h2 className="text-lg font-black text-slate-800">
+                <AlertTriangle className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                <h2 className="text-lg font-black text-slate-800 dark:text-slate-100">
                   Top Issues (System) อ้างอิงจากข้อมูลล่าสุด
                 </h2>
-                <span className="text-sm bg-indigo-100 text-indigo-700 font-extrabold px-4 py-1.5 rounded-full ml-auto shadow-sm border border-indigo-200">
+                <span className="text-sm bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-extrabold px-4 py-1.5 rounded-full ml-auto shadow-sm border border-indigo-200 dark:border-indigo-800">
                   พบข้อมูลทั้งหมด: {(totalCallsCount || 0).toLocaleString()}{" "}
                   CALL
                 </span>
@@ -2798,15 +2922,15 @@ export default function App() {
                   {topIssuesKPI.map((kpi: any, idx: any) => (
                     <div
                       key={idx}
-                      className={`bg-white rounded-2xl shadow-sm border border-slate-200/70 p-6 ${kpi.color} flex flex-col justify-between hover:shadow-md transition-all relative overflow-hidden print:border-2`}
+                      className={`bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200/70 dark:border-slate-700 p-6 ${kpi.color} flex flex-col justify-between hover:shadow-md transition-all relative overflow-hidden print:border-2`}
                     >
                       <div className="flex justify-between items-start mb-3">
-                        <span className="text-sm font-extrabold text-slate-500 uppercase tracking-wide truncate w-4/5">
+                        <span className="text-sm font-extrabold text-slate-500 dark:text-slate-400 uppercase tracking-wide truncate w-4/5">
                           {kpi.title}
                         </span>
                       </div>
                       <div className="flex items-baseline gap-2 mt-1">
-                        <span className="text-4xl font-black text-slate-900 tracking-tight">
+                        <span className="text-4xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
                           {(kpi.val || 0).toLocaleString()}
                         </span>
                       </div>
@@ -2814,7 +2938,7 @@ export default function App() {
                   ))}
                 </div>
               ) : (
-                <div className="bg-white p-8 rounded-3xl border border-slate-200 text-center text-slate-400 text-base font-bold">
+                <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 text-center text-slate-400 dark:text-slate-500 text-base font-bold transition-colors">
                   ไม่พบข้อมูลตรงตามเงื่อนไขที่กรอง
                 </div>
               )}
@@ -2881,34 +3005,34 @@ export default function App() {
               ].map(renderStandardTable)}
 
               {/* 6. TABLE: BRANCH CALL STATUS */}
-              <div className="bg-white rounded-3xl border border-slate-200/85 shadow-sm overflow-hidden print:break-inside-avoid text-left">
-                <div className="px-6 py-5 bg-slate-50 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                  <span className="text-base font-extrabold text-slate-800 flex items-center gap-3">
-                    <span className="w-8 h-8 bg-indigo-100 text-indigo-700 text-sm font-black flex items-center justify-center rounded-lg">
+              <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200/85 dark:border-slate-700 shadow-sm overflow-hidden print:break-inside-avoid text-left transition-colors">
+                <div className="px-6 py-5 bg-slate-50 dark:bg-slate-800/80 border-b border-slate-100 dark:border-slate-700 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <span className="text-base font-extrabold text-slate-800 dark:text-slate-100 flex items-center gap-3">
+                    <span className="w-8 h-8 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 text-sm font-black flex items-center justify-center rounded-lg">
                       6
                     </span>
                     สรุปปริมาณสายการโทรแจ้งซ่อมรายสาขา (Branch Call Volume)
                   </span>
 
                   <div className="relative w-full md:w-80 print:hidden">
-                    <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                    <Search className="w-4 h-4 text-slate-400 dark:text-slate-500 absolute left-3 top-1/2 transform -translate-y-1/2" />
                     <input
                       type="text"
                       placeholder="ค้นหารหัส หรือชื่อสาขา..."
                       value={branchSearch}
                       onChange={(e) => setBranchSearch(e.target.value)}
-                      className="w-full text-sm bg-white pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 hover:border-slate-300 outline-none focus:border-indigo-500 transition-all font-semibold"
+                      className="w-full text-sm bg-white dark:bg-slate-900 pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-600 hover:border-slate-300 dark:hover:border-slate-500 text-slate-800 dark:text-slate-200 outline-none focus:border-indigo-500 transition-all font-semibold"
                     />
                   </div>
                 </div>
 
                 <div className="overflow-x-auto max-h-[700px] custom-scrollbar relative print:max-h-none print:overflow-visible">
                   <table className="w-full text-left border-collapse whitespace-nowrap">
-                    <thead className="sticky top-0 z-10 bg-slate-100 shadow-sm print:static">
-                      <tr className="text-sm font-extrabold text-slate-600 border-b border-slate-200 uppercase">
-                        <th className="px-5 py-4 sticky left-0 z-30 bg-slate-100 border-r border-slate-200 print:static">
+                    <thead className="sticky top-0 z-10 bg-slate-100 dark:bg-slate-800 shadow-sm print:static">
+                      <tr className="text-sm font-extrabold text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 uppercase">
+                        <th className="px-5 py-4 sticky left-0 z-30 bg-slate-100 dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 print:static">
                           <div className="flex items-center gap-3">
-                            <span className="w-10 text-center text-slate-400">
+                            <span className="w-10 text-center text-slate-400 dark:text-slate-500">
                               อันดับ
                             </span>
                             <span>รหัสสาขา</span>
@@ -2919,7 +3043,7 @@ export default function App() {
                           พื้นที่ (AREA)
                         </th>
                         <th className="px-4 py-4 text-center">ทีม (TEAM)</th>
-                        <th className="px-4 py-4 text-center bg-slate-200/60 font-extrabold">
+                        <th className="px-4 py-4 text-center bg-slate-200/60 dark:bg-slate-700/60 font-extrabold">
                           รวม CALL
                         </th>
                         {dynamicLists.months.map((m: any) => (
@@ -2932,7 +3056,7 @@ export default function App() {
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="text-sm font-semibold text-slate-700">
+                    <tbody className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                       {visibleBranches.length > 0 ? (
                         visibleBranches.map((branch: any, idx: any) => {
                           if (!branch) return null; // 🔥 ป้องกันตัวแปร branch เป็น undefined
@@ -2945,9 +3069,9 @@ export default function App() {
                           return (
                             <tr
                               key={idx}
-                              className={`border-b border-slate-100 hover:bg-indigo-50/50 transition-all cursor-pointer group ${
+                              className={`border-b border-slate-100 dark:border-slate-700/50 hover:bg-indigo-50/50 dark:hover:bg-slate-700/50 transition-all cursor-pointer group ${
                                 isCrossFiltered
-                                  ? "bg-indigo-50/40 font-bold"
+                                  ? "bg-indigo-50/40 dark:bg-indigo-900/30 font-bold"
                                   : ""
                               }`}
                               onClick={() => {
@@ -2965,28 +3089,28 @@ export default function App() {
                               }}
                             >
                               <td
-                                className={`px-5 py-4 font-bold sticky left-0 z-10 border-r border-slate-100 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] transition-colors print:static ${
+                                className={`px-5 py-4 font-bold sticky left-0 z-10 border-r border-slate-100 dark:border-slate-700/50 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] transition-colors print:static ${
                                   isCrossFiltered
-                                    ? "bg-indigo-50 border-l-4 border-l-indigo-600 text-indigo-700"
-                                    : "bg-white text-indigo-600"
+                                    ? "bg-indigo-50 dark:bg-slate-800 border-l-4 border-l-indigo-600 dark:border-l-indigo-500 text-indigo-700 dark:text-indigo-400"
+                                    : "bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400"
                                 }`}
                               >
                                 <div className="flex items-center gap-3">
                                   <span
                                     className={`flex items-center justify-center w-10 h-8 rounded-lg text-sm font-black print:border ${
                                       branch?.rank === 1
-                                        ? "bg-amber-100 text-amber-600"
+                                        ? "bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400"
                                         : branch?.rank === 2
-                                        ? "bg-slate-200 text-slate-600"
+                                        ? "bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300"
                                         : branch?.rank === 3
-                                        ? "bg-orange-100 text-orange-600"
-                                        : "bg-slate-50 text-slate-400"
+                                        ? "bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-400"
+                                        : "bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500"
                                     }`}
                                   >
                                     {branch?.rank}
                                   </span>
                                   {isCrossFiltered && (
-                                    <span className="w-3 h-3 bg-indigo-600 rounded-full animate-pulse flex-shrink-0"></span>
+                                    <span className="w-3 h-3 bg-indigo-600 dark:bg-indigo-500 rounded-full animate-pulse flex-shrink-0"></span>
                                   )}
                                   <span className="text-base">
                                     {branch?.id}
@@ -2994,22 +3118,22 @@ export default function App() {
                                 </div>
                               </td>
                               <td
-                                className="px-5 py-4 text-slate-900 font-extrabold truncate max-w-[250px] print:whitespace-normal text-base"
+                                className="px-5 py-4 text-slate-900 dark:text-slate-100 font-extrabold truncate max-w-[250px] print:whitespace-normal text-base"
                                 title={branch?.name}
                               >
                                 {branch?.name}
                               </td>
                               <td className="px-4 py-4 text-center">
-                                <span className="bg-slate-100 px-3 py-1 rounded-md text-slate-600 font-bold print:border text-sm">
+                                <span className="bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-md text-slate-600 dark:text-slate-300 font-bold print:border text-sm">
                                   {branch?.area}
                                 </span>
                               </td>
                               <td className="px-4 py-4 text-center">
-                                <span className="bg-indigo-50 px-3 py-1 rounded-md text-indigo-700 font-bold print:border text-sm">
+                                <span className="bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-md text-indigo-700 dark:text-indigo-300 font-bold print:border text-sm">
                                   {branch?.team}
                                 </span>
                               </td>
-                              <td className="px-4 py-4 text-center font-black text-lg bg-transparent text-[#1e3a8a]">
+                              <td className="px-4 py-4 text-center font-black text-lg bg-transparent text-[#1e3a8a] dark:text-indigo-300">
                                 {(branch?.total || 0).toLocaleString()}
                               </td>
                               {(branch?.monthly || []).map(
@@ -3023,13 +3147,17 @@ export default function App() {
                                       key={mIdx}
                                       className={`px-2 py-4 text-center font-extrabold text-sm transition-colors print:border-l ${
                                         isCrossFiltered && val > 0
-                                          ? "bg-[#fda4af] text-[#881337]"
+                                          ? "bg-[#fda4af] dark:bg-rose-800/60 text-[#881337] dark:text-rose-100"
                                           : colors.bg
                                       } ${
                                         !isCrossFiltered && val > 0
                                           ? colors.textMain
                                           : ""
-                                      } ${!val ? "text-slate-300" : ""}`}
+                                      } ${
+                                        !val
+                                          ? "text-slate-300 dark:text-slate-600"
+                                          : ""
+                                      }`}
                                     >
                                       {val > 0
                                         ? (val || 0).toLocaleString()
@@ -3045,7 +3173,7 @@ export default function App() {
                         <tr>
                           <td
                             colSpan={dynamicLists.months.length + 5}
-                            className="text-center py-10 text-slate-400 font-bold text-base"
+                            className="text-center py-10 text-slate-400 dark:text-slate-500 font-bold text-base"
                           >
                             ไม่พบข้อมูลสาขาที่ค้นหา
                           </td>
@@ -3053,20 +3181,20 @@ export default function App() {
                       )}
                     </tbody>
                     {branchTableData.length > 0 && (
-                      <tfoot className="sticky bottom-0 z-30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] outline outline-1 outline-indigo-200 bg-[#eff6ff] print:static">
+                      <tfoot className="sticky bottom-0 z-30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] outline outline-1 outline-indigo-200 dark:outline-slate-700 bg-[#eff6ff] dark:bg-slate-900 print:static">
                         <tr>
                           <td
                             colSpan={4}
-                            className="px-5 py-4 font-black text-indigo-900 sticky left-0 z-40 bg-[#eff6ff] border-r border-indigo-200 text-right pr-6 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] text-base print:static"
+                            className="px-5 py-4 font-black text-indigo-900 dark:text-indigo-300 sticky left-0 z-40 bg-[#eff6ff] dark:bg-slate-900 border-r border-indigo-200 dark:border-slate-700 text-right pr-6 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] text-base print:static"
                           >
                             Grand Total (รวมทั้งหมด)
                           </td>
-                          <td className="px-4 py-4 text-center font-black text-xl text-indigo-900 border-r border-indigo-200 align-middle">
+                          <td className="px-4 py-4 text-center font-black text-xl text-indigo-900 dark:text-indigo-300 border-r border-indigo-200 dark:border-slate-700 align-middle">
                             {(grandBranchTotal || 0).toLocaleString()}
                           </td>
                           {grandBranchMonthly.map((val: any, mIdx: any) => {
                             let pctText = null;
-                            let pctColor = "text-slate-400";
+                            let pctColor = "text-slate-400 dark:text-slate-500";
                             if (mIdx > 0 && grandBranchMonthly[mIdx - 1] > 0) {
                               const pct =
                                 ((val - grandBranchMonthly[mIdx - 1]) /
@@ -3074,10 +3202,10 @@ export default function App() {
                                 100;
                               pctColor =
                                 pct > 0
-                                  ? "text-[#e11d48]"
+                                  ? "text-[#e11d48] dark:text-rose-400"
                                   : pct < 0
-                                  ? "text-[#10b981]"
-                                  : "text-slate-500";
+                                  ? "text-[#10b981] dark:text-emerald-400"
+                                  : "text-slate-500 dark:text-slate-400";
                               pctText = `${pct > 0 ? "+" : ""}${pct.toFixed(
                                 2
                               )}%`;
@@ -3085,9 +3213,9 @@ export default function App() {
                             return (
                               <td
                                 key={mIdx}
-                                className="px-2 py-4 text-center border-r border-indigo-200/60 align-middle"
+                                className="px-2 py-4 text-center border-r border-indigo-200/60 dark:border-slate-700 align-middle"
                               >
-                                <div className="font-black text-base text-indigo-900">
+                                <div className="font-black text-base text-indigo-900 dark:text-indigo-300">
                                   {(val || 0).toLocaleString()}
                                 </div>
                                 {pctText && (
@@ -3126,9 +3254,9 @@ export default function App() {
             </section>
 
             <section className="mt-10 mb-14 text-left">
-              <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-8">
-                <h2 className="text-base font-black text-slate-800 mb-8 flex items-center gap-3">
-                  <div className="w-2.5 h-5 bg-indigo-600 rounded-sm"></div>
+              <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200/80 dark:border-slate-700 shadow-sm p-8 transition-colors">
+                <h2 className="text-base font-black text-slate-800 dark:text-slate-100 mb-8 flex items-center gap-3">
+                  <div className="w-2.5 h-5 bg-indigo-600 dark:bg-indigo-500 rounded-sm"></div>
                   สรุปปริมาณการแจ้งซ่อมรายเดือน (Total Monthly Workload)
                 </h2>
                 <div className="px-2">
@@ -3140,19 +3268,21 @@ export default function App() {
         )}
 
         {activeTab === "settings" && (
-          <div className="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm max-w-2xl mx-auto print:hidden text-left">
-            <h3 className="text-xl font-black text-slate-900 mb-3 flex items-center gap-3">
-              <FileSpreadsheet className="w-6 h-6 text-indigo-600" />
+          <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-8 shadow-sm max-w-2xl mx-auto print:hidden text-left transition-colors">
+            <h3 className="text-xl font-black text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-3">
+              <FileSpreadsheet className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
               จัดการและตั้งค่าแหล่งข้อมูล (Data Source)
             </h3>
-            <p className="text-sm font-medium text-slate-500 border-b border-slate-100 pb-5 mb-8">
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 border-b border-slate-100 dark:border-slate-700 pb-5 mb-8">
               สถานะปัจจุบัน: ดึงข้อมูลจาก{" "}
-              <span className="font-extrabold text-indigo-600">{fileName}</span>{" "}
+              <span className="font-extrabold text-indigo-600 dark:text-indigo-400">
+                {fileName}
+              </span>{" "}
               ({(rawData || []).length.toLocaleString()} แถว)
             </p>
             <div className="space-y-6">
-              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                <label className="block text-sm font-black text-slate-700 uppercase mb-4">
+              <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <label className="block text-sm font-black text-slate-700 dark:text-slate-300 uppercase mb-4">
                   อัปโหลดไฟล์ชุดใหม่ (Upload New CSV)
                 </label>
                 <div className="flex gap-4">
@@ -3165,19 +3295,19 @@ export default function App() {
                   />
                   <button
                     onClick={() => fileInputRef.current.click()}
-                    className="px-6 py-3 bg-white border border-slate-300 hover:border-indigo-500 hover:text-indigo-600 text-slate-700 font-bold text-sm rounded-xl transition-all flex items-center gap-2 shadow-sm"
+                    className="px-6 py-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 hover:border-indigo-500 dark:hover:border-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 text-slate-700 dark:text-slate-300 font-bold text-sm rounded-xl transition-all flex items-center gap-2 shadow-sm"
                   >
                     <UploadCloud className="w-5 h-5" /> เลือกไฟล์ CSV ของคุณ
                   </button>
                   <button
                     onClick={handleLoadDemoData}
-                    className="px-6 py-3 bg-indigo-50 border border-indigo-200 hover:border-indigo-500 text-indigo-700 font-bold text-sm rounded-xl transition-all flex items-center gap-2 shadow-sm"
+                    className="px-6 py-3 bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-200 dark:border-indigo-800 hover:border-indigo-500 dark:hover:border-indigo-500 text-indigo-700 dark:text-indigo-300 font-bold text-sm rounded-xl transition-all flex items-center gap-2 shadow-sm"
                   >
                     <PlayCircle className="w-5 h-5" /> สร้างข้อมูลจำลอง (Demo)
                   </button>
                 </div>
                 {isProcessing && (
-                  <span className="text-sm font-bold text-slate-500 flex items-center gap-2 mt-4">
+                  <span className="text-sm font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2 mt-4">
                     <RefreshCw className="w-4 h-4 animate-spin" />{" "}
                     กำลังประมวลผล...
                   </span>
