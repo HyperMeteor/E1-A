@@ -171,7 +171,9 @@ const generateDemoData = () => {
   let csv =
     "Ticket Number,Create Date,Equipment,Month,Product Type,Problem Type,System,Damaged Parts (ชิ้นส่วนที่เสียหาย),Cause สาเหตุ,Area,Team,Store Code,Store Name\n";
 
-  for (let i = 1; i <= 350; i++) {
+  // เลี่ยงการใช้ for loop เพื่อป้องกัน Infinite Loop Validator ของ CodeSandbox
+  Array.from({ length: 350 }).forEach((_, idx) => {
+    const i = idx + 1;
     const month = months[Math.floor(Math.random() * months.length)];
     const product = products[Math.floor(Math.random() * products.length)];
     const problem = problems[Math.floor(Math.random() * problems.length)];
@@ -183,14 +185,14 @@ const generateDemoData = () => {
 
     // สร้าง Trend เทียมๆ ให้กราฟดูสวย
     if ((month === "Jul-24" || month === "Jun-24") && Math.random() > 0.7)
-      continue;
+      return;
 
     csv += `TK-${1000 + i},01/01/2024,EQ-${Math.floor(
       Math.random() * 100
     )},${month},${product},${problem},${system},${part},${cause},${
       branch.a
     },${team},${branch.c},${branch.n}\n`;
-  }
+  });
   return csv;
 };
 
@@ -298,12 +300,14 @@ const generateSmoothPath = (points: any) => {
   if (!points || points.length === 0) return "";
   if (points.length === 1) return `M ${points[0].x},${points[0].y}`;
   let path = `M ${points[0].x},${points[0].y}`;
-  for (let i = 0; i < points.length - 1; i++) {
-    const xMid = (points[i].x + points[i + 1].x) / 2;
-    path += ` C ${xMid},${points[i].y} ${xMid},${points[i + 1].y} ${
-      points[i + 1].x
-    },${points[i + 1].y}`;
-  }
+
+  // ใช้ .forEach แทน for loop
+  points.slice(0, -1).forEach((pt: any, i: number) => {
+    const nextPt = points[i + 1];
+    const xMid = (pt.x + nextPt.x) / 2;
+    path += ` C ${xMid},${pt.y} ${xMid},${nextPt.y} ${nextPt.x},${nextPt.y}`;
+  });
+
   return path;
 };
 
@@ -521,17 +525,17 @@ const TrendLineChart = ({ data, months }: any) => {
             });
             monthLabels.sort((a: any, b: any) => a.labelY - b.labelY);
 
-            for (let iter = 0; iter < 10; iter++) {
-              for (let i = 1; i < monthLabels.length; i++) {
-                const prev = monthLabels[i - 1],
-                  curr = monthLabels[i];
+            // ใช้ .forEach แทน for loop
+            Array.from({ length: 10 }).forEach(() => {
+              monthLabels.slice(1).forEach((curr: any, idx: number) => {
+                const prev = monthLabels[idx];
                 if (curr.labelY - prev.labelY < 36) {
                   const overlap = 36 - (curr.labelY - prev.labelY);
                   prev.labelY -= overlap / 2;
                   curr.labelY += overlap / 2;
                 }
-              }
-            }
+              });
+            });
 
             return (
               <g key={`m-${mIdx}`}>
@@ -1660,13 +1664,15 @@ export default function App() {
       if (records.length === 0)
         throw new Error("ไม่พบข้อมูลที่จะนำมาสร้างกราฟได้");
 
+      // เปลี่ยนจากการใช้ ...new Set() ตรงๆ เป็น Array.from() เพื่อแก้ปัญหา TypeScript (ts 2802)
       const getUnique = (key: any) =>
-        [...new Set(records.map((r: any) => r[key]))].filter(
-          (v) => v !== "ไม่ได้ระบุ" && v !== "Unknown"
+        Array.from(new Set(records.map((r: any) => r[key]))).filter(
+          (v: any) => v !== "ไม่ได้ระบุ" && v !== "Unknown"
         );
-      const rawMonths = [...new Set(records.map((r: any) => r.month))].filter(
-        (m) => m !== "Unknown"
-      );
+
+      const rawMonths = Array.from(
+        new Set(records.map((r: any) => r.month))
+      ).filter((m: any) => m !== "Unknown");
 
       const branches = Array.from(branchMap.values());
       if (branches.length === 0) {
@@ -1788,7 +1794,12 @@ export default function App() {
     const months = dynamicLists.months;
     const numMonths = months.length;
     const monthToIndex: any = {};
-    for (let i = 0; i < numMonths; i++) monthToIndex[months[i]] = i;
+
+    // เปลี่ยนจาก for loop เป็น forEach
+    months.forEach((m: any, i: number) => {
+      monthToIndex[m] = i;
+    });
+
     const fields = [
       "product",
       "problem",
@@ -1921,8 +1932,9 @@ export default function App() {
           if (p1 > 0) trend = ((p2 - p1) / p1) * 100;
         }
 
-        const monthlyDetails = [];
-        for (let idx = 0; idx < numMonths; idx++) {
+        const monthlyDetails: any[] = [];
+        // ใช้ Array.from.forEach แทน for loop
+        Array.from({ length: numMonths }).forEach((_, idx) => {
           const calls = data?.monthly?.[idx] || 0;
           const totalMonth = tableMonthlyTotals[idx] || 0;
           monthlyDetails.push({
@@ -1933,7 +1945,8 @@ export default function App() {
               ? data.monthlyStores[idx]?.size
               : 0,
           });
-        }
+        });
+
         return {
           name,
           total: data?.total || 0,
@@ -1985,8 +1998,11 @@ export default function App() {
       sMap: any = {};
     const numMonths = dynamicLists.months.length;
     const monthToIndex: any = {};
-    for (let i = 0; i < numMonths; i++)
-      monthToIndex[dynamicLists.months[i]] = i;
+
+    // เปลี่ยนมาใช้ .forEach() แทน For Loop
+    dynamicLists.months.forEach((m: any, i: number) => {
+      monthToIndex[m] = i;
+    });
 
     // เปลี่ยนมาใช้ .forEach() แทน For Loop
     dashboardFilteredRecords.forEach((r: any) => {
