@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 // ==========================================
 // 0. ไอคอน (INLINE ICONS - ZERO DEPENDENCY)
 // ==========================================
-const Icon = ({ children, className = "", ...props }) => (
+const Icon = ({ children, className = "", ...props }: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -20,69 +20,69 @@ const Icon = ({ children, className = "", ...props }) => (
     {children}
   </svg>
 );
-const BarChart2 = (p) => (
+const BarChart2 = (p: any) => (
   <Icon {...p}>
     <line x1="18" y1="20" x2="18" y2="10" />
     <line x1="12" y1="20" x2="12" y2="4" />
     <line x1="6" y1="20" x2="6" y2="14" />
   </Icon>
 );
-const Settings = (p) => (
+const Settings = (p: any) => (
   <Icon {...p}>
     <circle cx="12" cy="12" r="3" />
     <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
   </Icon>
 );
-const TrendingUp = (p) => (
+const TrendingUp = (p: any) => (
   <Icon {...p}>
     <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
     <polyline points="17 6 23 6 23 12" />
   </Icon>
 );
-const RefreshCw = (p) => (
+const RefreshCw = (p: any) => (
   <Icon {...p}>
     <polyline points="23 4 23 10 17 10" />
     <polyline points="1 20 1 14 7 14" />
     <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
   </Icon>
 );
-const Search = (p) => (
+const Search = (p: any) => (
   <Icon {...p}>
     <circle cx="11" cy="11" r="8" />
     <line x1="21" y1="21" x2="16.65" y2="16.65" />
   </Icon>
 );
-const Layers = (p) => (
+const Layers = (p: any) => (
   <Icon {...p}>
     <polygon points="12 2 2 7 12 12 22 7 12 2" />
     <polyline points="2 12 12 17 22 12" />
     <polyline points="2 17 12 22 22 17" />
   </Icon>
 );
-const ChevronDown = (p) => (
+const ChevronDown = (p: any) => (
   <Icon {...p}>
     <polyline points="6 9 12 15 18 9" />
   </Icon>
 );
-const ChevronUp = (p) => (
+const ChevronUp = (p: any) => (
   <Icon {...p}>
     <polyline points="18 15 12 9 6 15" />
   </Icon>
 );
-const CheckCircle = (p) => (
+const CheckCircle = (p: any) => (
   <Icon {...p}>
     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
     <polyline points="22 4 12 14.01 9 11.01" />
   </Icon>
 );
-const AlertTriangle = (p) => (
+const AlertTriangle = (p: any) => (
   <Icon {...p}>
     <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
     <line x1="12" y1="9" x2="12" y2="13" />
     <line x1="12" y1="17" x2="12.01" y2="17" />
   </Icon>
 );
-const UploadCloud = (p) => (
+const UploadCloud = (p: any) => (
   <Icon {...p}>
     <polyline points="16 16 12 12 8 16" />
     <line x1="12" y1="12" x2="12" y2="21" />
@@ -90,7 +90,7 @@ const UploadCloud = (p) => (
     <polyline points="16 16 12 12 8 16" />
   </Icon>
 );
-const FileSpreadsheet = (p) => (
+const FileSpreadsheet = (p: any) => (
   <Icon {...p}>
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
     <polyline points="14 2 14 8 20 8" />
@@ -99,7 +99,7 @@ const FileSpreadsheet = (p) => (
     <polyline points="10 9 9 9 8 9" />
   </Icon>
 );
-const PlayCircle = (p) => (
+const PlayCircle = (p: any) => (
   <Icon {...p}>
     <circle cx="12" cy="12" r="10" />
     <polygon points="10 8 16 12 10 16 10 8" />
@@ -195,15 +195,15 @@ const generateDemoData = () => {
 };
 
 // ใช้ array.forEach แทน for loop เพื่อข้าม Infinite Loop Protector ของ CodeSandbox
-function csvToArray(text) {
+function csvToArray(text: any) {
   let p = "";
-  let row = [""];
+  let row: any[] = [""];
   const ret = [row];
   let i = 0;
   let r = 0;
   let s = true;
 
-  text.split("").forEach((l) => {
+  text.split("").forEach((l: any) => {
     if ('"' === l) {
       if (s && l === p) row[i] += l;
       s = !s;
@@ -227,7 +227,7 @@ function csvToArray(text) {
   );
 }
 
-const normalizeMonthString = (mStr) => {
+const normalizeMonthString = (mStr: any) => {
   if (!mStr || mStr === "NULL" || mStr === "Unknown") return "Unknown";
   let cleaned = String(mStr).trim();
   const parts = cleaned.split("-");
@@ -241,8 +241,8 @@ const normalizeMonthString = (mStr) => {
   return cleaned;
 };
 
-const sortMonths = (months) => {
-  const monthOrder = {
+const sortMonths = (months: any) => {
+  const monthOrder: any = {
     Jan: 1,
     Feb: 2,
     Mar: 3,
@@ -269,7 +269,7 @@ const sortMonths = (months) => {
   });
 };
 
-const thaiMonths = {
+const thaiMonths: any = {
   Jan: "ม.ค.",
   Feb: "ก.พ.",
   Mar: "มี.ค.",
@@ -284,7 +284,7 @@ const thaiMonths = {
   Dec: "ธ.ค.",
 };
 
-const formatMonthThaiSplit = (monthYearStr) => {
+const formatMonthThaiSplit = (monthYearStr: any) => {
   if (!monthYearStr || monthYearStr === "Unknown")
     return { m: monthYearStr || "", y: "" };
   const parts = String(monthYearStr).split("-");
@@ -294,7 +294,7 @@ const formatMonthThaiSplit = (monthYearStr) => {
   };
 };
 
-const generateSmoothPath = (points) => {
+const generateSmoothPath = (points: any) => {
   if (!points || points.length === 0) return "";
   if (points.length === 1) return `M ${points[0].x},${points[0].y}`;
   let path = `M ${points[0].x},${points[0].y}`;
@@ -308,11 +308,13 @@ const generateSmoothPath = (points) => {
 };
 
 class SimulatedSet {
+  set: Set<any>;
+  simulatedSize: number;
   constructor() {
     this.set = new Set();
     this.simulatedSize = 0;
   }
-  add(val) {
+  add(val: any) {
     if (typeof val === "number") {
       this.simulatedSize = Math.max(this.simulatedSize, val);
     } else {
@@ -322,12 +324,12 @@ class SimulatedSet {
   get size() {
     return this.simulatedSize > 0 ? this.simulatedSize : this.set.size;
   }
-  has(val) {
+  has(val: any) {
     return this.set.has(val);
   }
 }
 
-const getHeatmapCellClasses = (value, maxVal) => {
+const getHeatmapCellClasses = (value: any, maxVal: any) => {
   if (value === 0)
     return {
       bg: "bg-white",
@@ -366,18 +368,19 @@ const getHeatmapCellClasses = (value, maxVal) => {
   };
 };
 
-const getRowMaxVal = (monthlyArray) => Math.max(...(monthlyArray || []), 1);
+const getRowMaxVal = (monthlyArray: any) =>
+  Math.max(...(monthlyArray || []), 1);
 
 // ==========================================
 // 2. CHART & UI COMPONENTS
 // ==========================================
 
-const TrendLineChart = ({ data, months }) => {
+const TrendLineChart = ({ data, months }: any) => {
   if (!data || data.length === 0 || !months || months.length === 0) return null;
 
   let maxVal = 1;
-  data.forEach((p) =>
-    (p?.monthly || []).forEach((v) => {
+  data.forEach((p: any) =>
+    (p?.monthly || []).forEach((v: any) => {
       if (v > maxVal) maxVal = v;
     })
   );
@@ -390,9 +393,9 @@ const TrendLineChart = ({ data, months }) => {
   const innerHeight = height - padding.top - padding.bottom;
   const xStep =
     months.length > 1 ? innerWidth / (months.length - 1) : innerWidth;
-  const getY = (val) =>
+  const getY = (val: any) =>
     padding.top + innerHeight - (val / maxVal) * innerHeight;
-  const getX = (idx) => padding.left + idx * xStep;
+  const getX = (idx: any) => padding.left + idx * xStep;
 
   const colors = ["#6366f1", "#0ea5e9", "#10b981", "#f59e0b", "#ef4444"];
 
@@ -451,10 +454,10 @@ const TrendLineChart = ({ data, months }) => {
               </text>
             );
           })}
-          {data.map((prod, pIdx) => {
+          {data.map((prod: any, pIdx: any) => {
             if (!prod) return null;
             const color = colors[pIdx % colors.length];
-            const points = (prod?.monthly || []).map((val, mIdx) => ({
+            const points = (prod?.monthly || []).map((val: any, mIdx: any) => ({
               x: getX(mIdx),
               y: getY(val),
             }));
@@ -471,10 +474,10 @@ const TrendLineChart = ({ data, months }) => {
               />
             );
           })}
-          {months.map((_, mIdx) => {
+          {months.map((_: any, mIdx: any) => {
             const cx = getX(mIdx);
             const monthLabels = data
-              .map((prod, pIdx) => {
+              .map((prod: any, pIdx: any) => {
                 if (!prod) return null;
                 const val = prod?.monthly?.[mIdx] || 0;
                 const prev = mIdx > 0 ? prod?.monthly?.[mIdx - 1] : null;
@@ -506,8 +509,8 @@ const TrendLineChart = ({ data, months }) => {
               })
               .filter(Boolean);
 
-            monthLabels.sort((a, b) => a.y - b.y);
-            monthLabels.forEach((lbl, idx) => {
+            monthLabels.sort((a: any, b: any) => a.y - b.y);
+            monthLabels.forEach((lbl: any, idx: any) => {
               if (idx % 2 === 0) {
                 lbl.labelY = lbl.y - 20;
                 lbl.placement = "above";
@@ -516,7 +519,7 @@ const TrendLineChart = ({ data, months }) => {
                 lbl.placement = "below";
               }
             });
-            monthLabels.sort((a, b) => a.labelY - b.labelY);
+            monthLabels.sort((a: any, b: any) => a.labelY - b.labelY);
 
             for (let iter = 0; iter < 10; iter++) {
               for (let i = 1; i < monthLabels.length; i++) {
@@ -532,7 +535,7 @@ const TrendLineChart = ({ data, months }) => {
 
             return (
               <g key={`m-${mIdx}`}>
-                {monthLabels.map((lbl) => {
+                {monthLabels.map((lbl: any) => {
                   const textWidth = Math.max(
                     64,
                     String(lbl.val).length * 8 + 12
@@ -617,7 +620,7 @@ const TrendLineChart = ({ data, months }) => {
               </g>
             );
           })}
-          {months.map((m, idx) => {
+          {months.map((m: any, idx: any) => {
             const thMonth = formatMonthThaiSplit(m);
             return (
               <text
@@ -634,7 +637,7 @@ const TrendLineChart = ({ data, months }) => {
         </svg>
       </div>
       <div className="flex flex-wrap justify-center gap-8 mt-6 pt-5 border-t border-slate-100">
-        {data.map((prod, idx) => {
+        {data.map((prod: any, idx: any) => {
           if (!prod) return null;
           return (
             <div
@@ -656,17 +659,17 @@ const TrendLineChart = ({ data, months }) => {
   );
 };
 
-const ParetoChart = ({ data, title, subtitle, icon: Icon }) => {
+const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
   const topData = useMemo(() => (data || []).slice(0, 15), [data]);
   if (topData.length === 0) return null;
 
   const totalSum = useMemo(
-    () => topData.reduce((sum, d) => sum + (d?.total || 0), 0),
+    () => topData.reduce((sum: any, d: any) => sum + (d?.total || 0), 0),
     [topData]
   );
   const chartData = useMemo(() => {
     let cum = 0;
-    return topData.map((d) => {
+    return topData.map((d: any) => {
       cum += d?.total || 0;
       return { ...d, cumPercent: totalSum > 0 ? (cum / totalSum) * 100 : 0 };
     });
@@ -685,13 +688,13 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }) => {
   const xStep = innerWidth / (chartData.length || 1);
   const barWidth = Math.min(xStep * 0.7, 45);
 
-  const getX = (idx) => padding.left + idx * xStep + xStep / 2;
-  const getRightY = (pct) =>
+  const getX = (idx: any) => padding.left + idx * xStep + xStep / 2;
+  const getRightY = (pct: any) =>
     padding.top + innerHeight - (pct / 100) * innerHeight;
   const linePoints = useMemo(
     () =>
       chartData
-        .map((d, i) => `${getX(i)},${getRightY(d?.cumPercent || 0)}`)
+        .map((d: any, i: any) => `${getX(i)},${getRightY(d?.cumPercent || 0)}`)
         .join(" "),
     [chartData]
   );
@@ -736,7 +739,7 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }) => {
               />
             );
           })}
-          {chartData.map((d, i) => {
+          {chartData.map((d: any, i: any) => {
             if (!d) return null;
             const h = ((d?.total || 0) / maxVal) * innerHeight;
             const y = padding.top + innerHeight - h;
@@ -777,7 +780,7 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }) => {
             strokeWidth="3"
             points={linePoints}
           />
-          {chartData.map((d, i) => {
+          {chartData.map((d: any, i: any) => {
             if (!d) return null;
             return (
               <g key={`cum-${i}`}>
@@ -854,7 +857,7 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }) => {
   );
 };
 
-const Sparkline = ({ data, forecast }) => {
+const Sparkline = ({ data, forecast }: any) => {
   if (!data || data.length === 0) return null;
   const len = data.length;
   const max = Math.max(...data, forecast || 1, 1);
@@ -890,11 +893,11 @@ const Sparkline = ({ data, forecast }) => {
     strokeColor = "#ef4444";
   }
 
-  const mainPointsArr = data.slice(0, len - 1).map((val, i) => ({
+  const mainPointsArr = data.slice(0, len - 1).map((val: any, i: any) => ({
     x: i * xStep,
     y: height - (val / max) * height * 0.7 - 6,
   }));
-  const mainPoints = mainPointsArr.map((p) => `${p.x},${p.y}`).join(" ");
+  const mainPoints = mainPointsArr.map((p: any) => `${p.x},${p.y}`).join(" ");
 
   let forecastPoints = "",
     lastX = 0,
@@ -943,7 +946,7 @@ const Sparkline = ({ data, forecast }) => {
             points={forecastPoints}
           />
         )}
-        {mainPointsArr.map((p, i) => (
+        {mainPointsArr.map((p: any, i: any) => (
           <circle
             key={`dot-${i}`}
             cx={p.x}
@@ -968,10 +971,10 @@ const Sparkline = ({ data, forecast }) => {
   );
 };
 
-const MonthlyWorkloadChart = ({ data }) => {
+const MonthlyWorkloadChart = ({ data }: any) => {
   if (!data || data.length === 0) return null;
 
-  const maxTotal = Math.max(...data.map((d) => d.total), 1);
+  const maxTotal = Math.max(...data.map((d: any) => d.total), 1);
   const maxVal = maxTotal * 1.3;
   const width = 1000,
     height = 320;
@@ -980,11 +983,14 @@ const MonthlyWorkloadChart = ({ data }) => {
   const innerHeight = height - padding.top - padding.bottom;
 
   const xStep = innerWidth / data.length;
-  const getX = (idx) => padding.left + idx * xStep + xStep / 2;
-  const getY = (val) =>
+  const getX = (idx: any) => padding.left + idx * xStep + xStep / 2;
+  const getY = (val: any) =>
     padding.top + innerHeight - (val / maxVal) * innerHeight;
 
-  const points = data.map((d, i) => ({ x: getX(i), y: getY(d.total) }));
+  const points = data.map((d: any, i: any) => ({
+    x: getX(i),
+    y: getY(d.total),
+  }));
   const pathData = generateSmoothPath(points);
 
   return (
@@ -994,7 +1000,7 @@ const MonthlyWorkloadChart = ({ data }) => {
         className="w-full h-auto min-w-[700px] overflow-visible"
       >
         {/* Bars */}
-        {data.map((d, i) => {
+        {data.map((d: any, i: any) => {
           const barH = (d.total / maxVal) * innerHeight;
           const barY = padding.top + innerHeight - barH;
           const barW = Math.min(xStep * 0.5, 60);
@@ -1032,7 +1038,7 @@ const MonthlyWorkloadChart = ({ data }) => {
         )}
 
         {/* Points & Labels */}
-        {data.map((d, i) => {
+        {data.map((d: any, i: any) => {
           const x = getX(i);
           const y = getY(d.total);
           const thDate = formatMonthThaiSplit(d.month);
@@ -1104,13 +1110,13 @@ const SearchableDropdown = ({
   onChange,
   count,
   isHighlight = false,
-}) => {
+}: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<any>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: any) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target))
         setIsOpen(false);
     };
@@ -1118,16 +1124,16 @@ const SearchableDropdown = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const filteredOptions = (options || []).filter((opt) =>
+  const filteredOptions = (options || []).filter((opt: any) =>
     String(opt || "")
       .toLowerCase()
       .includes(searchTerm.toLowerCase())
   );
   const isAllSelected = selectedValues.length === 0;
 
-  const toggleOption = (opt) => {
+  const toggleOption = (opt: any) => {
     if (selectedValues.includes(opt))
-      onChange(selectedValues.filter((v) => v !== opt));
+      onChange(selectedValues.filter((v: any) => v !== opt));
     else onChange([...selectedValues, opt]);
   };
 
@@ -1191,7 +1197,7 @@ const SearchableDropdown = ({
               <span className="truncate">เลือกทั้งหมด ({count})</span>
             </div>
             {filteredOptions.length > 0 ? (
-              filteredOptions.map((opt) => {
+              filteredOptions.map((opt: any) => {
                 const isSelected = selectedValues.includes(opt);
                 return (
                   <div
@@ -1228,9 +1234,9 @@ const SearchableDropdown = ({
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("overview");
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<any>(null);
 
-  const [rawData, setRawData] = useState([]);
+  const [rawData, setRawData] = useState<any[]>([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [fileName, setFileName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -1240,7 +1246,7 @@ export default function App() {
 
   const hasAutoFetched = useRef(false);
 
-  const [dynamicLists, setDynamicLists] = useState({
+  const [dynamicLists, setDynamicLists] = useState<any>({
     months: [],
     products: [],
     problems: [],
@@ -1252,18 +1258,18 @@ export default function App() {
     branches: [],
   });
 
-  const [filterProduct, setFilterProduct] = useState([]);
-  const [filterProblem, setFilterProblem] = useState([]);
-  const [filterCause, setFilterCause] = useState([]);
-  const [filterDamagedPart, setFilterDamagedPart] = useState([]);
-  const [filterSystem, setFilterSystem] = useState([]);
-  const [filterArea, setFilterArea] = useState([]);
-  const [filterTeam, setFilterTeam] = useState([]);
-  const [filterMonth, setFilterMonth] = useState([]);
+  const [filterProduct, setFilterProduct] = useState<any[]>([]);
+  const [filterProblem, setFilterProblem] = useState<any[]>([]);
+  const [filterCause, setFilterCause] = useState<any[]>([]);
+  const [filterDamagedPart, setFilterDamagedPart] = useState<any[]>([]);
+  const [filterSystem, setFilterSystem] = useState<any[]>([]);
+  const [filterArea, setFilterArea] = useState<any[]>([]);
+  const [filterTeam, setFilterTeam] = useState<any[]>([]);
+  const [filterMonth, setFilterMonth] = useState<any[]>([]);
 
   const [branchSearch, setBranchSearch] = useState("");
 
-  const [crossFilters, setCrossFilters] = useState({
+  const [crossFilters, setCrossFilters] = useState<any>({
     product: new Set(),
     problem: new Set(),
     system: new Set(),
@@ -1274,7 +1280,7 @@ export default function App() {
     storeCode: new Set(),
   });
 
-  const [rowLimits, setRowLimits] = useState({
+  const [rowLimits, setRowLimits] = useState<any>({
     sec1: 15,
     sec2: 15,
     sec3: 15,
@@ -1285,7 +1291,7 @@ export default function App() {
     sec8: 15,
   });
 
-  const [openSections, setOpenSections] = useState({
+  const [openSections, setOpenSections] = useState<any>({
     sec1: true,
     sec2: true,
     sec3: true,
@@ -1308,8 +1314,8 @@ export default function App() {
     }
   }, []);
 
-  const toggleSection = (sec) =>
-    setOpenSections((prev) => ({ ...prev, [sec]: !prev[sec] }));
+  const toggleSection = (sec: any) =>
+    setOpenSections((prev: any) => ({ ...prev, [sec]: !prev[sec] }));
 
   const resetFilters = () => {
     setFilterProduct([]);
@@ -1356,14 +1362,14 @@ export default function App() {
     }
   }, []);
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = (e: any) => {
     const file = e.target.files[0];
     if (!file) return;
     setFileName(file.name);
     setIsProcessing(true);
     setLoadError("");
     const reader = new FileReader();
-    reader.onload = (event) => {
+    reader.onload = (event: any) => {
       const success = processCSVData(event.target.result, false);
       if (!success) {
         setIsProcessing(false);
@@ -1388,7 +1394,7 @@ export default function App() {
     }, 600);
   };
 
-  const loadFromGoogleSheet = async (url) => {
+  const loadFromGoogleSheet = async (url: any) => {
     setIsProcessing(true);
     setLoadError("");
     try {
@@ -1450,24 +1456,24 @@ export default function App() {
           "คอลัมน์ไม่ตรงกับระบบ กรุณาตรวจสอบหัวตาราง (Headers) ในไฟล์ของคุณ"
         );
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Fetch Error:", error);
       setLoadError(`${error.message}`);
       setIsProcessing(false);
     }
   };
 
-  const processCSVData = (csvText, isAutoLoad = false) => {
+  const processCSVData = (csvText: any, isAutoLoad = false) => {
     try {
       const parsedArray = csvToArray(csvText);
       if (parsedArray.length < 2)
         throw new Error("ไฟล์ว่างเปล่าหรือมีรูปแบบไม่ถูกต้อง");
 
-      const headers = parsedArray[0].map((h) => (h ? h.trim() : ""));
-      const records = [];
+      const headers = parsedArray[0].map((h: any) => (h ? h.trim() : ""));
+      const records: any[] = [];
       const branchMap = new Map();
 
-      const monthHeaderIndices = [];
+      const monthHeaderIndices: any[] = [];
       const monthNames = [
         "Jan",
         "Feb",
@@ -1495,7 +1501,7 @@ export default function App() {
         "ส.ค.",
       ];
 
-      headers.forEach((h, index) => {
+      headers.forEach((h: any, index: any) => {
         const lowerH = h.toLowerCase();
         const containsMonth = monthNames.some((m) =>
           lowerH.startsWith(m.toLowerCase())
@@ -1512,7 +1518,7 @@ export default function App() {
 
       if (monthHeaderIndices.length > 0 && !headers.includes("Ticket Number")) {
         let categoryColIndex = 0;
-        headers.forEach((h, index) => {
+        headers.forEach((h: any, index: any) => {
           const lowerH = h.toLowerCase();
           if (
             lowerH.includes("product") ||
@@ -1525,7 +1531,7 @@ export default function App() {
         });
 
         // ใช้ .forEach() แทน for loop เพื่อข้าม Infinite Loop Protector ของ CodeSandbox
-        parsedArray.slice(1).forEach((row, index) => {
+        parsedArray.slice(1).forEach((row: any, index: any) => {
           const i = index + 1;
           if (row.length <= 1 && row[0] === "") return;
 
@@ -1574,7 +1580,7 @@ export default function App() {
         });
       } else {
         const hasStandardColumns = headers.some(
-          (h) =>
+          (h: any) =>
             h.toLowerCase().includes("ticket") ||
             h.toLowerCase().includes("product") ||
             h.toLowerCase().includes("month")
@@ -1585,23 +1591,23 @@ export default function App() {
         }
 
         // ใช้ .forEach() แทน for loop
-        parsedArray.slice(1).forEach((row, index) => {
+        parsedArray.slice(1).forEach((row: any, index: any) => {
           const i = index + 1;
           if (row.length === 1 && row[0] === "") return;
 
-          const record = {};
-          headers.forEach((header, idx) => {
+          const record: any = {};
+          headers.forEach((header: any, idx: any) => {
             record[header] = row[idx] ? row[idx].trim() : "NULL";
           });
 
-          const getValue = (key) =>
+          const getValue = (key: any) =>
             record[key] && record[key] !== "NULL" && record[key] !== ""
               ? record[key]
               : "ไม่ได้ระบุ";
 
-          const findCol = (keywords) => {
+          const findCol = (keywords: any) => {
             for (let k of keywords) {
-              const matchedHeader = headers.find((h) =>
+              const matchedHeader = headers.find((h: any) =>
                 h.toLowerCase().includes(k.toLowerCase())
               );
               if (matchedHeader) return record[matchedHeader];
@@ -1654,11 +1660,11 @@ export default function App() {
       if (records.length === 0)
         throw new Error("ไม่พบข้อมูลที่จะนำมาสร้างกราฟได้");
 
-      const getUnique = (key) =>
-        [...new Set(records.map((r) => r[key]))].filter(
+      const getUnique = (key: any) =>
+        [...new Set(records.map((r: any) => r[key]))].filter(
           (v) => v !== "ไม่ได้ระบุ" && v !== "Unknown"
         );
-      const rawMonths = [...new Set(records.map((r) => r.month))].filter(
+      const rawMonths = [...new Set(records.map((r: any) => r.month))].filter(
         (m) => m !== "Unknown"
       );
 
@@ -1690,7 +1696,7 @@ export default function App() {
       resetFilters();
       setIsProcessing(false);
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.warn("Parse Failed.", error);
       if (isAutoLoad) {
         throw error;
@@ -1714,7 +1720,7 @@ export default function App() {
     const monthSet = filterMonth.length > 0 ? new Set(filterMonth) : null;
 
     // เปลี่ยนมาใช้ .filter แทน for loop ช่วยเลี่ยง Loop Protector ของ CodeSandbox ได้ 100%
-    return rawData.filter((rec) => {
+    return rawData.filter((rec: any) => {
       if (productSet && !productSet.has(rec.product)) return false;
       if (problemSet && !problemSet.has(rec.problem)) return false;
       if (causeSet && !causeSet.has(rec.cause)) return false;
@@ -1745,13 +1751,17 @@ export default function App() {
     if (activeFields.length === 0) return globalFilteredRecords;
 
     // ใช้ .filter และ .every เพื่อให้ปลอดภัยจาก CodeSandbox Loop Limits
-    return globalFilteredRecords.filter((r) => {
+    return globalFilteredRecords.filter((r: any) => {
       return activeFields.every((f) => crossFilters[f].has(r[f]));
     });
   }, [globalFilteredRecords, crossFilters]);
 
   const totalCallsCount = useMemo(
-    () => dashboardFilteredRecords.reduce((acc, curr) => acc + curr.calls, 0),
+    () =>
+      dashboardFilteredRecords.reduce(
+        (acc: any, curr: any) => acc + curr.calls,
+        0
+      ),
     [dashboardFilteredRecords]
   );
 
@@ -1761,7 +1771,7 @@ export default function App() {
     let maxDay = 1;
 
     // เปลี่ยนจาก for loop เป็น forEach
-    rawData.forEach((r) => {
+    rawData.forEach((r: any) => {
       if (r.month === latestMonth && r.rawCreateDate) {
         const parts = r.rawCreateDate.split(" ")[0].split("/");
         if (parts.length >= 2) {
@@ -1777,7 +1787,7 @@ export default function App() {
     if (!isDataLoaded) return {};
     const months = dynamicLists.months;
     const numMonths = months.length;
-    const monthToIndex = {};
+    const monthToIndex: any = {};
     for (let i = 0; i < numMonths; i++) monthToIndex[months[i]] = i;
     const fields = [
       "product",
@@ -1793,7 +1803,7 @@ export default function App() {
     );
     const activeStoreFilters =
       crossFilters["storeCode"] && crossFilters["storeCode"].size > 0;
-    const structures = {};
+    const structures: any = {};
 
     fields.forEach((f) => {
       structures[f] = {};
@@ -1801,7 +1811,7 @@ export default function App() {
     structures["storeCode"] = {};
 
     // เปลี่ยนมาใช้ .forEach ร่วมกับ .every แทน For Loop ป้องกันการถูก Sandbox ตัดจบ
-    globalFilteredRecords.forEach((r) => {
+    globalFilteredRecords.forEach((r: any) => {
       const mIdx = monthToIndex[r.month];
       const hasValidMonth = mIdx !== undefined;
 
@@ -1862,16 +1872,16 @@ export default function App() {
   const aprMayIndices = useMemo(
     () => ({
       apr: dynamicLists.months.findIndex(
-        (m) => String(m).startsWith("Apr") || String(m).startsWith("เม.ย.")
+        (m: any) => String(m).startsWith("Apr") || String(m).startsWith("เม.ย.")
       ),
       may: dynamicLists.months.findIndex(
-        (m) => String(m).startsWith("May") || String(m).startsWith("พ.ค.")
+        (m: any) => String(m).startsWith("May") || String(m).startsWith("พ.ค.")
       ),
     }),
     [dynamicLists.months]
   );
 
-  const generateTableDataFromStats = (field) => {
+  const generateTableDataFromStats = (field: any) => {
     if (!isDataLoaded || !aggregatedStats[field]) return [];
     const fieldStats = aggregatedStats[field];
     const statsEntries = Object.entries(fieldStats);
@@ -1880,18 +1890,18 @@ export default function App() {
     const tableMonthlyTotals = new Array(numMonths).fill(0);
 
     // ใช้ forEach เลี่ยง Loop Protection
-    statsEntries.forEach(([_, data]) => {
+    statsEntries.forEach(([_, data]: any) => {
       if (data) {
         tableTotalCalls += data.total;
-        (data.monthly || []).forEach((val, m) => {
+        (data.monthly || []).forEach((val: any, m: any) => {
           if (m < numMonths) tableMonthlyTotals[m] += val;
         });
       }
     });
 
     return statsEntries
-      .filter(([_, data]) => data && data.total > 0)
-      .map(([name, data]) => {
+      .filter(([_, data]: any) => data && data.total > 0)
+      .map(([name, data]: any) => {
         const monthlyVals = data?.monthly || [];
         const len = monthlyVals.length;
         let forecast =
@@ -1937,7 +1947,7 @@ export default function App() {
           trend,
         };
       })
-      .sort((a, b) => b.total - a.total);
+      .sort((a: any, b: any) => b.total - a.total);
   };
 
   const productTypeTableData = useMemo(
@@ -1971,15 +1981,15 @@ export default function App() {
 
   const chartAggregatedData = useMemo(() => {
     if (!isDataLoaded) return { products: [], systems: [] };
-    const pMap = {},
-      sMap = {};
+    const pMap: any = {},
+      sMap: any = {};
     const numMonths = dynamicLists.months.length;
-    const monthToIndex = {};
+    const monthToIndex: any = {};
     for (let i = 0; i < numMonths; i++)
       monthToIndex[dynamicLists.months[i]] = i;
 
     // เปลี่ยนมาใช้ .forEach() แทน For Loop
-    dashboardFilteredRecords.forEach((r) => {
+    dashboardFilteredRecords.forEach((r: any) => {
       const mIdx = monthToIndex[r.month];
       if (!pMap[r.product])
         pMap[r.product] = { total: 0, monthly: new Array(numMonths).fill(0) };
@@ -1990,14 +2000,14 @@ export default function App() {
       sMap[r.system].total += r.calls;
       if (mIdx !== undefined) sMap[r.system].monthly[mIdx] += r.calls;
     });
-    const formatData = (map) =>
+    const formatData = (map: any) =>
       Object.entries(map)
-        .map(([name, data]) => ({
+        .map(([name, data]: any) => ({
           name,
           total: data?.total || 0,
           monthly: data?.monthly || [],
         }))
-        .sort((a, b) => b.total - a.total);
+        .sort((a: any, b: any) => b.total - a.total);
     return { products: formatData(pMap), systems: formatData(sMap) };
   }, [dashboardFilteredRecords, dynamicLists.months, isDataLoaded]);
 
@@ -2008,11 +2018,13 @@ export default function App() {
       "border-l-4 border-sky-500 text-sky-600",
       "border-l-4 border-rose-500 text-rose-600",
     ];
-    return chartAggregatedData.systems.slice(0, 3).map((item, idx) => ({
-      title: item?.name || "",
-      val: item?.total || 0,
-      color: colors[idx] || colors[0],
-    }));
+    return chartAggregatedData.systems
+      .slice(0, 3)
+      .map((item: any, idx: any) => ({
+        title: item?.name || "",
+        val: item?.total || 0,
+        color: colors[idx] || colors[0],
+      }));
   }, [chartAggregatedData.systems, isDataLoaded]);
 
   const top5ProductsForTrend = useMemo(
@@ -2023,10 +2035,10 @@ export default function App() {
   const branchTableData = useMemo(() => {
     if (!isDataLoaded || !aggregatedStats["storeCode"]) return [];
     const storeStats = aggregatedStats["storeCode"];
-    const result = [];
+    const result: any[] = [];
 
     // เปลี่ยน for ให้ปลอดภัย
-    dynamicLists.branches.forEach((b) => {
+    dynamicLists.branches.forEach((b: any) => {
       if (b && b.id) {
         const stats = storeStats[b.id];
         if (stats && stats.total > 0)
@@ -2068,9 +2080,11 @@ export default function App() {
 
   const monthlySummaryData = useMemo(() => {
     if (!isDataLoaded) return [];
-    return dynamicLists.months.map((m) => {
-      const filtered = dashboardFilteredRecords.filter((r) => r.month === m);
-      const total = filtered.reduce((sum, r) => sum + r.calls, 0);
+    return dynamicLists.months.map((m: any) => {
+      const filtered = dashboardFilteredRecords.filter(
+        (r: any) => r.month === m
+      );
+      const total = filtered.reduce((sum: any, r: any) => sum + r.calls, 0);
       return { month: m, total: total };
     });
   }, [dashboardFilteredRecords, dynamicLists.months, isDataLoaded]);
@@ -2127,7 +2141,7 @@ export default function App() {
         highlight: true,
       },
     ];
-    return configs.map((cfg, i) => (
+    return configs.map((cfg: any, i: any) => (
       <SearchableDropdown
         key={i}
         label={cfg.label}
@@ -2140,20 +2154,22 @@ export default function App() {
     ));
   };
 
-  const renderStandardTable = (tableDef) => {
+  const renderStandardTable = (tableDef: any) => {
     const limit = rowLimits[tableDef.id] || 15;
     const visibleRows = (tableDef.data || []).slice(0, limit);
     const hasMore = (tableDef.data || []).length > limit;
     const grandTotal = (tableDef.data || []).reduce(
-      (acc, row) => acc + (row?.total || 0),
+      (acc: any, row: any) => acc + (row?.total || 0),
       0
     );
     const grandMonthly = Array(dynamicLists.months.length).fill(0);
     let grandForecast = 0;
 
-    (tableDef.data || []).forEach((row) => {
+    (tableDef.data || []).forEach((row: any) => {
       if (!row) return; // 🔥 ป้องกัน Row เป็น undefined
-      (row?.monthly || []).forEach((val, i) => (grandMonthly[i] += val));
+      (row?.monthly || []).forEach(
+        (val: any, i: any) => (grandMonthly[i] += val)
+      );
       grandForecast += row?.forecast || 0;
     });
 
@@ -2211,7 +2227,7 @@ export default function App() {
                       <span className="whitespace-nowrap">รวม CALLS</span>
                     </div>
                   </th>
-                  {dynamicLists.months.map((m) => {
+                  {dynamicLists.months.map((m: any) => {
                     const thDate = formatMonthThaiSplit(m);
                     return (
                       <th
@@ -2228,7 +2244,7 @@ export default function App() {
                   <th className="px-3 py-5 border-l border-slate-200 min-w-[100px] text-center leading-tight whitespace-pre-line">
                     {getTrendHeader()}
                   </th>
-                  {dynamicLists.months.map((m) => {
+                  {dynamicLists.months.map((m: any) => {
                     const thDate = formatMonthThaiSplit(m);
                     return (
                       <th
@@ -2260,7 +2276,7 @@ export default function App() {
               </thead>
               <tbody className="text-sm">
                 {visibleRows.length > 0 ? (
-                  visibleRows.map((row, idx) => {
+                  visibleRows.map((row: any, idx: any) => {
                     if (!row) return null; // 🔥 ป้องกันตัวแปร row เป็น undefined
                     const maxVal = getRowMaxVal(row?.monthly || []);
                     const isCrossFiltered = crossFilters[
@@ -2273,7 +2289,7 @@ export default function App() {
                           isCrossFiltered ? "bg-indigo-50/40 font-bold" : ""
                         }`}
                         onClick={() => {
-                          setCrossFilters((prev) => {
+                          setCrossFilters((prev: any) => {
                             const next = { ...prev };
                             const newSet = new Set(
                               next[tableDef.keyField] || []
@@ -2308,47 +2324,49 @@ export default function App() {
                             ({row?.percentage || 0}%)
                           </div>
                         </td>
-                        {(row?.monthlyDetails || []).map((detail, mIdx) => {
-                          const colors = getHeatmapCellClasses(
-                            detail?.calls || 0,
-                            maxVal
-                          );
-                          return (
-                            <td
-                              key={mIdx}
-                              className={`px-2 py-4 text-center transition-colors ${
-                                isCrossFiltered && detail?.calls > 0
-                                  ? "bg-[#fda4af]"
-                                  : colors.bg
-                              }`}
-                            >
-                              {(detail?.calls || 0) > 0 ? (
-                                <>
-                                  <div
-                                    className={`font-extrabold text-[14px] leading-none ${
-                                      isCrossFiltered
-                                        ? "text-[#881337]"
-                                        : colors.textMain
-                                    }`}
-                                  >
-                                    {(detail?.calls || 0).toLocaleString()}
-                                  </div>
-                                  <div
-                                    className={`font-medium text-[11px] mt-1.5 ${
-                                      isCrossFiltered
-                                        ? "text-[#be123c]"
-                                        : colors.textSub
-                                    }`}
-                                  >
-                                    ({detail?.percentage || 0}%)
-                                  </div>
-                                </>
-                              ) : (
-                                <div className="text-slate-300">-</div>
-                              )}
-                            </td>
-                          );
-                        })}
+                        {(row?.monthlyDetails || []).map(
+                          (detail: any, mIdx: any) => {
+                            const colors = getHeatmapCellClasses(
+                              detail?.calls || 0,
+                              maxVal
+                            );
+                            return (
+                              <td
+                                key={mIdx}
+                                className={`px-2 py-4 text-center transition-colors ${
+                                  isCrossFiltered && detail?.calls > 0
+                                    ? "bg-[#fda4af]"
+                                    : colors.bg
+                                }`}
+                              >
+                                {(detail?.calls || 0) > 0 ? (
+                                  <>
+                                    <div
+                                      className={`font-extrabold text-[14px] leading-none ${
+                                        isCrossFiltered
+                                          ? "text-[#881337]"
+                                          : colors.textMain
+                                      }`}
+                                    >
+                                      {(detail?.calls || 0).toLocaleString()}
+                                    </div>
+                                    <div
+                                      className={`font-medium text-[11px] mt-1.5 ${
+                                        isCrossFiltered
+                                          ? "text-[#be123c]"
+                                          : colors.textSub
+                                      }`}
+                                    >
+                                      ({detail?.percentage || 0}%)
+                                    </div>
+                                  </>
+                                ) : (
+                                  <div className="text-slate-300">-</div>
+                                )}
+                              </td>
+                            );
+                          }
+                        )}
                         <td className="px-2 py-4 text-center font-extrabold text-[13px] bg-transparent border-l border-slate-100">
                           <div
                             className={`${
@@ -2468,9 +2486,9 @@ export default function App() {
             {hasMore && (
               <div className="p-4 bg-slate-50/60 border-t border-slate-100 text-center">
                 <button
-                  onClick={(e) => {
+                  onClick={(e: any) => {
                     e.stopPropagation();
-                    setRowLimits((prev) => ({
+                    setRowLimits((prev: any) => ({
                       ...prev,
                       [tableDef.id]: (prev[tableDef.id] || 15) + 30,
                     }));
@@ -2602,13 +2620,15 @@ export default function App() {
   const visibleBranches = branchTableData.slice(0, storeLimit);
   const hasMoreBranches = branchTableData.length > storeLimit;
   const grandBranchTotal = branchTableData.reduce(
-    (acc, row) => acc + (row?.total || 0),
+    (acc: any, row: any) => acc + (row?.total || 0),
     0
   );
   const grandBranchMonthly = Array(dynamicLists.months.length).fill(0);
-  branchTableData.forEach((row) => {
+  branchTableData.forEach((row: any) => {
     if (row)
-      (row?.monthly || []).forEach((val, i) => (grandBranchMonthly[i] += val));
+      (row?.monthly || []).forEach(
+        (val: any, i: any) => (grandBranchMonthly[i] += val)
+      );
   });
 
   return (
@@ -2703,7 +2723,7 @@ export default function App() {
               </div>
               {topIssuesKPI.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 print:grid-cols-3">
-                  {topIssuesKPI.map((kpi, idx) => (
+                  {topIssuesKPI.map((kpi: any, idx: any) => (
                     <div
                       key={idx}
                       className={`bg-white rounded-2xl shadow-sm border border-slate-200/70 p-6 ${kpi.color} flex flex-col justify-between hover:shadow-md transition-all relative overflow-hidden print:border-2`}
@@ -2830,7 +2850,7 @@ export default function App() {
                         <th className="px-4 py-4 text-center bg-slate-200/60 font-extrabold">
                           รวม CALL
                         </th>
-                        {dynamicLists.months.map((m) => (
+                        {dynamicLists.months.map((m: any) => (
                           <th
                             key={m}
                             className="px-2 py-4 text-center min-w-[60px]"
@@ -2842,7 +2862,7 @@ export default function App() {
                     </thead>
                     <tbody className="text-sm font-semibold text-slate-700">
                       {visibleBranches.length > 0 ? (
-                        visibleBranches.map((branch, idx) => {
+                        visibleBranches.map((branch: any, idx: any) => {
                           if (!branch) return null; // 🔥 ป้องกันตัวแปร branch เป็น undefined
                           const maxVal = getRowMaxVal(branch?.monthly || []);
 
@@ -2859,7 +2879,7 @@ export default function App() {
                                   : ""
                               }`}
                               onClick={() => {
-                                setCrossFilters((prev) => {
+                                setCrossFilters((prev: any) => {
                                   const next = { ...prev };
                                   const newSet = new Set(
                                     next["storeCode"] || []
@@ -2920,30 +2940,32 @@ export default function App() {
                               <td className="px-4 py-4 text-center font-black text-lg bg-transparent text-[#1e3a8a]">
                                 {(branch?.total || 0).toLocaleString()}
                               </td>
-                              {(branch?.monthly || []).map((val, mIdx) => {
-                                const colors = getHeatmapCellClasses(
-                                  val || 0,
-                                  Math.max(maxVal, 5)
-                                );
-                                return (
-                                  <td
-                                    key={mIdx}
-                                    className={`px-2 py-4 text-center font-extrabold text-sm transition-colors print:border-l ${
-                                      isCrossFiltered && val > 0
-                                        ? "bg-[#fda4af] text-[#881337]"
-                                        : colors.bg
-                                    } ${
-                                      !isCrossFiltered && val > 0
-                                        ? colors.textMain
-                                        : ""
-                                    } ${!val ? "text-slate-300" : ""}`}
-                                  >
-                                    {val > 0
-                                      ? (val || 0).toLocaleString()
-                                      : "-"}
-                                  </td>
-                                );
-                              })}
+                              {(branch?.monthly || []).map(
+                                (val: any, mIdx: any) => {
+                                  const colors = getHeatmapCellClasses(
+                                    val || 0,
+                                    Math.max(maxVal, 5)
+                                  );
+                                  return (
+                                    <td
+                                      key={mIdx}
+                                      className={`px-2 py-4 text-center font-extrabold text-sm transition-colors print:border-l ${
+                                        isCrossFiltered && val > 0
+                                          ? "bg-[#fda4af] text-[#881337]"
+                                          : colors.bg
+                                      } ${
+                                        !isCrossFiltered && val > 0
+                                          ? colors.textMain
+                                          : ""
+                                      } ${!val ? "text-slate-300" : ""}`}
+                                    >
+                                      {val > 0
+                                        ? (val || 0).toLocaleString()
+                                        : "-"}
+                                    </td>
+                                  );
+                                }
+                              )}
                             </tr>
                           );
                         })
@@ -2962,7 +2984,7 @@ export default function App() {
                       <tfoot className="sticky bottom-0 z-30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] outline outline-1 outline-indigo-200 bg-[#eff6ff] print:static">
                         <tr>
                           <td
-                            colSpan="4"
+                            colSpan={4}
                             className="px-5 py-4 font-black text-indigo-900 sticky left-0 z-40 bg-[#eff6ff] border-r border-indigo-200 text-right pr-6 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.05)] text-base print:static"
                           >
                             Grand Total (รวมทั้งหมด)
@@ -2970,7 +2992,7 @@ export default function App() {
                           <td className="px-4 py-4 text-center font-black text-xl text-indigo-900 border-r border-indigo-200 align-middle">
                             {(grandBranchTotal || 0).toLocaleString()}
                           </td>
-                          {grandBranchMonthly.map((val, mIdx) => {
+                          {grandBranchMonthly.map((val: any, mIdx: any) => {
                             let pctText = null;
                             let pctColor = "text-slate-400";
                             if (mIdx > 0 && grandBranchMonthly[mIdx - 1] > 0) {
