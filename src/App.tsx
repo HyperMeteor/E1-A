@@ -136,50 +136,12 @@ const DEFAULT_SHEET_URL =
 
 // ✨ ฟังก์ชันสร้างข้อมูลจำลอง (Demo Data) ให้ใช้งานได้ทันที 100%
 const generateDemoData = () => {
-  const months = [
-    "Jan-24",
-    "Feb-24",
-    "Mar-24",
-    "Apr-24",
-    "May-24",
-    "Jun-24",
-    "Jul-24",
-  ];
-  const products = [
-    "ตู้แช่เย็น",
-    "เครื่องปรับอากาศ",
-    "เตาอบไมโครเวฟ",
-    "เครื่องชงกาแฟ",
-    "ระบบ POS",
-  ];
-  const problems = [
-    "ไม่ทำงาน",
-    "เสียงดังผิดปกติ",
-    "น้ำรั่ว",
-    "อุณหภูมิไม่คงที่",
-    "ไฟไม่เข้า",
-  ];
-  const systems = [
-    "ระบบทำความเย็น",
-    "ระบบไฟฟ้า",
-    "ระบบน้ำ",
-    "ระบบควบคุม",
-    "โครงสร้างภายนอก",
-  ];
-  const parts = [
-    "คอมเพรสเซอร์",
-    "เมนบอร์ด",
-    "เซ็นเซอร์",
-    "พัดลมระบายอากาศ",
-    "หน้าจอสัมผัส",
-  ];
-  const causes = [
-    "เสื่อมสภาพตามอายุ",
-    "กระแสไฟกระชาก",
-    "การใช้งานผิดวิธี",
-    "ขาดการบำรุงรักษา",
-    "ชิ้นส่วนหลวม",
-  ];
+  const months = ["Jan-24", "Feb-24", "Mar-24", "Apr-24", "May-24", "Jun-24", "Jul-24"];
+  const products = ["ตู้แช่เย็น", "เครื่องปรับอากาศ", "เตาอบไมโครเวฟ", "เครื่องชงกาแฟ", "ระบบ POS"];
+  const problems = ["ไม่ทำงาน", "เสียงดังผิดปกติ", "น้ำรั่ว", "อุณหภูมิไม่คงที่", "ไฟไม่เข้า"];
+  const systems = ["ระบบทำความเย็น", "ระบบไฟฟ้า", "ระบบน้ำ", "ระบบควบคุม", "โครงสร้างภายนอก"];
+  const parts = ["คอมเพรสเซอร์", "เมนบอร์ด", "เซ็นเซอร์", "พัดลมระบายอากาศ", "หน้าจอสัมผัส"];
+  const causes = ["เสื่อมสภาพตามอายุ", "กระแสไฟกระชาก", "การใช้งานผิดวิธี", "ขาดการบำรุงรักษา", "ชิ้นส่วนหลวม"];
   const areas = ["กรุงเทพมหานคร", "ภาคเหนือ", "ภาคใต้", "ภาคอีสาน"];
   const teams = ["Team Service A", "Team Service B", "Team Service C"];
   const branches = [
@@ -190,8 +152,7 @@ const generateDemoData = () => {
     { c: "B-005", n: "สาขาขอนแก่น", a: "ภาคอีสาน" },
   ];
 
-  let csv =
-    "Ticket Number,Create Date,Equipment,Month,Product Type,Problem Type,System,Damaged Parts (ชิ้นส่วนที่เสียหาย),Cause สาเหตุ,Area,Team,Store Code,Store Name\n";
+  let csv = "Ticket Number,Create Date,Equipment,Month,Product Type,Problem Type,System,Damaged Parts (ชิ้นส่วนที่เสียหาย),Cause สาเหตุ,Area,Team,Store Code,Store Name\n";
 
   // เลี่ยงการใช้ for loop เพื่อป้องกัน Infinite Loop Validator ของ CodeSandbox
   Array.from({ length: 350 }).forEach((_, idx) => {
@@ -204,16 +165,11 @@ const generateDemoData = () => {
     const cause = causes[Math.floor(Math.random() * causes.length)];
     const branch = branches[Math.floor(Math.random() * branches.length)];
     const team = teams[Math.floor(Math.random() * teams.length)];
-
+    
     // สร้าง Trend เทียมๆ ให้กราฟดูสวย
-    if ((month === "Jul-24" || month === "Jun-24") && Math.random() > 0.7)
-      return;
+    if ((month === "Jul-24" || month === "Jun-24") && Math.random() > 0.7) return; 
 
-    csv += `TK-${1000 + i},01/01/2024,EQ-${Math.floor(
-      Math.random() * 100
-    )},${month},${product},${problem},${system},${part},${cause},${
-      branch.a
-    },${team},${branch.c},${branch.n}\n`;
+    csv += `TK-${1000 + i},01/01/2024,EQ-${Math.floor(Math.random()*100)},${month},${product},${problem},${system},${part},${cause},${branch.a},${team},${branch.c},${branch.n}\n`;
   });
   return csv;
 };
@@ -227,7 +183,7 @@ function csvToArray(text: any) {
   let r = 0;
   let s = true;
 
-  text.split("").forEach((l: any) => {
+  text.split('').forEach((l: any) => {
     if ('"' === l) {
       if (s && l === p) row[i] += l;
       s = !s;
@@ -246,8 +202,7 @@ function csvToArray(text: any) {
   });
 
   return ret.filter(
-    (rowArr) =>
-      rowArr.length > 1 || (rowArr.length === 1 && rowArr[0].trim() !== "")
+    (rowArr) => rowArr.length > 1 || (rowArr.length === 1 && rowArr[0].trim() !== "")
   );
 }
 
@@ -267,18 +222,8 @@ const normalizeMonthString = (mStr: any) => {
 
 const sortMonths = (months: any) => {
   const monthOrder: any = {
-    Jan: 1,
-    Feb: 2,
-    Mar: 3,
-    Apr: 4,
-    May: 5,
-    Jun: 6,
-    Jul: 7,
-    Aug: 8,
-    Sep: 9,
-    Oct: 10,
-    Nov: 11,
-    Dec: 12,
+    Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6,
+    Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12,
   };
   return [...months].sort((a, b) => {
     const partsA = (a || "").split("-");
@@ -294,18 +239,8 @@ const sortMonths = (months: any) => {
 };
 
 const thaiMonths: any = {
-  Jan: "ม.ค.",
-  Feb: "ก.พ.",
-  Mar: "มี.ค.",
-  Apr: "เม.ย.",
-  May: "พ.ค.",
-  Jun: "มิ.ย.",
-  Jul: "ก.ค.",
-  Aug: "ส.ค.",
-  Sep: "ก.ย.",
-  Oct: "ต.ค.",
-  Nov: "พ.ย.",
-  Dec: "ธ.ค.",
+  Jan: "ม.ค.", Feb: "ก.พ.", Mar: "มี.ค.", Apr: "เม.ย.", May: "พ.ค.", Jun: "มิ.ย.",
+  Jul: "ก.ค.", Aug: "ส.ค.", Sep: "ก.ย.", Oct: "ต.ค.", Nov: "พ.ย.", Dec: "ธ.ค.",
 };
 
 const formatMonthThaiSplit = (monthYearStr: any) => {
@@ -322,14 +257,14 @@ const generateSmoothPath = (points: any) => {
   if (!points || points.length === 0) return "";
   if (points.length === 1) return `M ${points[0].x},${points[0].y}`;
   let path = `M ${points[0].x},${points[0].y}`;
-
+  
   // ใช้ .forEach แทน for loop
   points.slice(0, -1).forEach((pt: any, i: number) => {
     const nextPt = points[i + 1];
     const xMid = (pt.x + nextPt.x) / 2;
     path += ` C ${xMid},${pt.y} ${xMid},${nextPt.y} ${nextPt.x},${nextPt.y}`;
   });
-
+  
   return path;
 };
 
@@ -396,8 +331,7 @@ const getHeatmapCellClasses = (value: any, maxVal: any) => {
   };
 };
 
-const getRowMaxVal = (monthlyArray: any) =>
-  Math.max(...(monthlyArray || []), 1);
+const getRowMaxVal = (monthlyArray: any) => Math.max(...(monthlyArray || []), 1);
 
 // ==========================================
 // 2. CHART & UI COMPONENTS
@@ -506,44 +440,37 @@ const TrendLineChart = ({ data, months }: any) => {
           })}
           {months.map((_: any, mIdx: any) => {
             const cx = getX(mIdx);
-            const monthLabels = data
-              .map((prod: any, pIdx: any) => {
-                if (!prod) return null;
-                const val = prod?.monthly?.[mIdx] || 0;
-                const prev = mIdx > 0 ? prod?.monthly?.[mIdx - 1] : null;
-                let pctText = "",
-                  pctColor = "currentColor";
-                let pctClass = "text-slate-500 dark:text-slate-400";
+            const monthLabels = data.map((prod: any, pIdx: any) => {
+              if (!prod) return null;
+              const val = prod?.monthly?.[mIdx] || 0;
+              const prev = mIdx > 0 ? prod?.monthly?.[mIdx - 1] : null;
+              let pctText = "",
+                pctColor = "currentColor";
+              let pctClass = "text-slate-500 dark:text-slate-400";
 
-                if (mIdx > 0 && prev !== null) {
-                  if (prev > 0) {
-                    const pct = ((val - prev) / prev) * 100;
-                    pctText = `${pct > 0 ? "+" : ""}${pct.toFixed(1)}%`;
-                    pctClass =
-                      pct > 0
-                        ? "text-rose-500 dark:text-rose-400"
-                        : pct < 0
-                        ? "text-emerald-500 dark:text-emerald-400"
-                        : "text-slate-500 dark:text-slate-400";
-                  } else if (val > 0) {
-                    pctText = "+100.0%";
-                    pctClass = "text-rose-500 dark:text-rose-400";
-                  }
+              if (mIdx > 0 && prev !== null) {
+                if (prev > 0) {
+                  const pct = ((val - prev) / prev) * 100;
+                  pctText = `${pct > 0 ? "+" : ""}${pct.toFixed(1)}%`;
+                  pctClass = pct > 0 ? "text-rose-500 dark:text-rose-400" : pct < 0 ? "text-emerald-500 dark:text-emerald-400" : "text-slate-500 dark:text-slate-400";
+                } else if (val > 0) {
+                  pctText = "+100.0%";
+                  pctClass = "text-rose-500 dark:text-rose-400";
                 }
-                return {
-                  pIdx,
-                  name: prod?.name,
-                  val,
-                  y: getY(val),
-                  color: colors[pIdx % colors.length],
-                  pctText,
-                  pctColor,
-                  pctClass,
-                  labelY: getY(val),
-                  placement: "above",
-                };
-              })
-              .filter(Boolean);
+              }
+              return {
+                pIdx,
+                name: prod?.name,
+                val,
+                y: getY(val),
+                color: colors[pIdx % colors.length],
+                pctText,
+                pctColor,
+                pctClass,
+                labelY: getY(val),
+                placement: "above",
+              };
+            }).filter(Boolean);
 
             monthLabels.sort((a: any, b: any) => a.y - b.y);
             monthLabels.forEach((lbl: any, idx: any) => {
@@ -616,10 +543,7 @@ const TrendLineChart = ({ data, months }: any) => {
                           fillOpacity="0.95"
                           stroke="currentColor"
                           strokeWidth="1.5"
-                          style={{
-                            stroke:
-                              "var(--tw-border-opacity, 1) rgba(226, 232, 240, 1)",
-                          }} // Fallback light mode border
+                          style={{ stroke: 'var(--tw-border-opacity, 1) rgba(226, 232, 240, 1)' }} // Fallback light mode border
                         />
                         <text
                           x="0"
@@ -683,7 +607,7 @@ const TrendLineChart = ({ data, months }: any) => {
       </div>
       <div className="flex flex-wrap justify-center gap-8 mt-6 pt-5 border-t border-slate-100 dark:border-slate-700">
         {data.map((prod: any, idx: any) => {
-          if (!prod) return null;
+          if(!prod) return null;
           return (
             <div
               key={`leg-${idx}`}
@@ -697,7 +621,7 @@ const TrendLineChart = ({ data, months }: any) => {
                 {(prod?.name || "").toUpperCase()}
               </span>
             </div>
-          );
+          )
         })}
       </div>
     </div>
@@ -748,12 +672,8 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
     <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700 shadow-sm p-6 w-full flex flex-col transition-colors">
       <div className="flex justify-between items-start mb-5">
         <div>
-          <h4 className="font-bold text-slate-800 dark:text-slate-100 text-base">
-            {title}
-          </h4>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-            {subtitle}
-          </p>
+          <h4 className="font-bold text-slate-800 dark:text-slate-100 text-base">{title}</h4>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{subtitle}</p>
         </div>
         <div className="bg-rose-50 dark:bg-rose-900/30 p-2.5 rounded-lg text-rose-500 dark:text-rose-400">
           {Icon && <Icon className="w-6 h-6" />}
@@ -761,12 +681,10 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
       </div>
       <div className="flex justify-center gap-6 text-sm font-bold mb-5">
         <span className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-          <span className="w-3.5 h-3.5 bg-indigo-600 dark:bg-indigo-400 rounded-sm"></span>{" "}
-          จำนวน (Count)
+          <span className="w-3.5 h-3.5 bg-indigo-600 dark:bg-indigo-400 rounded-sm"></span> จำนวน (Count)
         </span>
         <span className="flex items-center gap-2 text-rose-500 dark:text-rose-400">
-          <span className="w-3.5 h-3.5 bg-rose-500 dark:bg-rose-400 rounded-full"></span>{" "}
-          สะสม (Cumulative %)
+          <span className="w-3.5 h-3.5 bg-rose-500 dark:bg-rose-400 rounded-full"></span> สะสม (Cumulative %)
         </span>
       </div>
       <div className="flex-1 w-full relative">
@@ -835,46 +753,43 @@ const ParetoChart = ({ data, title, subtitle, icon: Icon }: any) => {
           {chartData.map((d: any, i: any) => {
             if (!d) return null;
             return (
-              <g key={`cum-${i}`}>
-                <text
-                  x={getX(i)}
-                  y={getRightY(d?.cumPercent || 0) - 12}
-                  textAnchor="middle"
-                  fontSize="12"
-                  fontWeight="extrabold"
-                  stroke="currentColor"
-                  className="text-white dark:text-slate-800"
-                  strokeWidth="3.5"
-                  strokeLinejoin="round"
-                >
-                  {(d?.cumPercent || 0).toFixed(1)}%
-                </text>
-                <text
-                  x={getX(i)}
-                  y={getRightY(d?.cumPercent || 0) - 12}
-                  textAnchor="middle"
-                  fontSize="12"
-                  fontWeight="extrabold"
-                  fill="currentColor"
-                  className="text-rose-600 dark:text-rose-400"
-                >
-                  {(d?.cumPercent || 0).toFixed(1)}%
-                </text>
-                <circle
-                  cx={getX(i)}
-                  cy={getRightY(d?.cumPercent || 0)}
-                  r="5"
-                  fill="currentColor"
-                  className="text-white dark:text-slate-800"
-                  stroke="currentColor"
-                  style={{
-                    stroke: "var(--tw-text-opacity, 1) rgba(244, 63, 94, 1)",
-                  }} // Fallback rose-500
-                  strokeWidth="2.5"
-                />
-              </g>
-            );
-          })}
+            <g key={`cum-${i}`}>
+              <text
+                x={getX(i)}
+                y={getRightY(d?.cumPercent || 0) - 12}
+                textAnchor="middle"
+                fontSize="12"
+                fontWeight="extrabold"
+                stroke="currentColor"
+                className="text-white dark:text-slate-800"
+                strokeWidth="3.5"
+                strokeLinejoin="round"
+              >
+                {(d?.cumPercent || 0).toFixed(1)}%
+              </text>
+              <text
+                x={getX(i)}
+                y={getRightY(d?.cumPercent || 0) - 12}
+                textAnchor="middle"
+                fontSize="12"
+                fontWeight="extrabold"
+                fill="currentColor"
+                className="text-rose-600 dark:text-rose-400"
+              >
+                {(d?.cumPercent || 0).toFixed(1)}%
+              </text>
+              <circle
+                cx={getX(i)}
+                cy={getRightY(d?.cumPercent || 0)}
+                r="5"
+                fill="currentColor"
+                className="text-white dark:text-slate-800"
+                stroke="currentColor"
+                style={{ stroke: 'var(--tw-text-opacity, 1) rgba(244, 63, 94, 1)' }} // Fallback rose-500
+                strokeWidth="2.5"
+              />
+            </g>
+          )})}
           {[0, 0.25, 0.5, 0.75, 1].map((ratio) => {
             const y = padding.top + innerHeight - ratio * innerHeight;
             const val = Math.round(ratio * maxVal);
@@ -921,8 +836,7 @@ const Sparkline = ({ data, forecast }: any) => {
   if (!data || data.length === 0) return null;
   const len = data.length;
   const max = Math.max(...data, forecast || 1, 1);
-  const width = 160,
-    height = 50;
+  const width = 160, height = 50; 
   const xStep = width / Math.max(len - 1, 1);
 
   let forecastTrend = 0,
@@ -955,7 +869,7 @@ const Sparkline = ({ data, forecast }: any) => {
 
   const mainPointsArr = data.slice(0, len - 1).map((val: any, i: any) => ({
     x: i * xStep,
-    y: height - (val / max) * height * 0.7 - 6,
+    y: height - (val / max) * height * 0.7 - 6
   }));
   const mainPoints = mainPointsArr.map((p: any) => `${p.x},${p.y}`).join(" ");
 
@@ -984,17 +898,7 @@ const Sparkline = ({ data, forecast }: any) => {
           {trendText}
         </div>
       )}
-      <svg
-        width={width}
-        height={height}
-        className={`overflow-visible mx-auto ${
-          forecastTrend > 0
-            ? "text-rose-600 dark:text-rose-500"
-            : forecastTrend < 0
-            ? "text-emerald-500 dark:text-emerald-400"
-            : "text-slate-400 dark:text-slate-500"
-        }`}
-      >
+      <svg width={width} height={height} className={`overflow-visible mx-auto ${forecastTrend > 0 ? "text-rose-600 dark:text-rose-500" : forecastTrend < 0 ? "text-emerald-500 dark:text-emerald-400" : "text-slate-400 dark:text-slate-500"}`}>
         {len > 1 && (
           <polyline
             fill="none"
@@ -1017,28 +921,9 @@ const Sparkline = ({ data, forecast }: any) => {
           />
         )}
         {mainPointsArr.map((p: any, i: any) => (
-          <circle
-            key={`dot-${i}`}
-            cx={p.x}
-            cy={p.y}
-            r="4"
-            fill="currentColor"
-            stroke="currentColor"
-            className="text-white dark:text-slate-800"
-            style={{ stroke: strokeColor }}
-            strokeWidth="2.5"
-          />
+          <circle key={`dot-${i}`} cx={p.x} cy={p.y} r="4" fill="currentColor" stroke="currentColor" className="text-white dark:text-slate-800" style={{ stroke: strokeColor }} strokeWidth="2.5" />
         ))}
-        <circle
-          cx={lastX}
-          cy={lastY}
-          r="5.5"
-          fill="currentColor"
-          stroke="currentColor"
-          className="text-white dark:text-slate-800 drop-shadow-sm"
-          style={{ fill: strokeColor }}
-          strokeWidth="2"
-        />
+        <circle cx={lastX} cy={lastY} r="5.5" fill="currentColor" stroke="currentColor" className="text-white dark:text-slate-800 drop-shadow-sm" style={{ fill: strokeColor }} strokeWidth="2" />
       </svg>
     </div>
   );
@@ -1048,30 +933,22 @@ const MonthlyWorkloadChart = ({ data }: any) => {
   if (!data || data.length === 0) return null;
 
   const maxTotal = Math.max(...data.map((d: any) => d.total), 1);
-  const maxVal = maxTotal * 1.3;
-  const width = 1000,
-    height = 320;
+  const maxVal = maxTotal * 1.3; 
+  const width = 1000, height = 320;
   const padding = { top: 40, right: 30, bottom: 60, left: 30 };
   const innerWidth = width - padding.left - padding.right;
   const innerHeight = height - padding.top - padding.bottom;
 
   const xStep = innerWidth / data.length;
-  const getX = (idx: any) => padding.left + idx * xStep + xStep / 2;
-  const getY = (val: any) =>
-    padding.top + innerHeight - (val / maxVal) * innerHeight;
+  const getX = (idx: any) => padding.left + (idx * xStep) + (xStep / 2);
+  const getY = (val: any) => padding.top + innerHeight - ((val / maxVal) * innerHeight);
 
-  const points = data.map((d: any, i: any) => ({
-    x: getX(i),
-    y: getY(d.total),
-  }));
+  const points = data.map((d: any, i: any) => ({ x: getX(i), y: getY(d.total) }));
   const pathData = generateSmoothPath(points);
 
   return (
     <div className="w-full overflow-x-auto custom-scrollbar">
-      <svg
-        viewBox={`0 0 ${width} ${height}`}
-        className="w-full h-auto min-w-[700px] overflow-visible"
-      >
+      <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto min-w-[700px] overflow-visible">
         {/* Bars */}
         {data.map((d: any, i: any) => {
           const barH = (d.total / maxVal) * innerHeight;
@@ -1079,13 +956,7 @@ const MonthlyWorkloadChart = ({ data }: any) => {
           const barW = Math.min(xStep * 0.5, 60);
           const x = getX(i);
           const r = 8;
-          const path = `M ${x - barW / 2},${barY + barH} L ${x - barW / 2},${
-            barY + r
-          } A ${r},${r} 0 0 1 ${x - barW / 2 + r},${barY} L ${
-            x + barW / 2 - r
-          },${barY} A ${r},${r} 0 0 1 ${x + barW / 2},${barY + r} L ${
-            x + barW / 2
-          },${barY + barH} Z`;
+          const path = `M ${x - barW/2},${barY + barH} L ${x - barW/2},${barY + r} A ${r},${r} 0 0 1 ${x - barW/2 + r},${barY} L ${x + barW/2 - r},${barY} A ${r},${r} 0 0 1 ${x + barW/2},${barY + r} L ${x + barW/2},${barY + barH} Z`;
 
           return (
             <path
@@ -1117,66 +988,20 @@ const MonthlyWorkloadChart = ({ data }: any) => {
           const thDate = formatMonthThaiSplit(d.month);
           return (
             <g key={`pt-${i}`}>
-              <circle
-                cx={x}
-                cy={y}
-                r="6"
-                fill="currentColor"
-                stroke="currentColor"
-                className="text-white dark:text-slate-800 drop-shadow-sm"
-                style={{
-                  stroke: "var(--tw-text-opacity, 1) rgba(245, 158, 11, 1)",
-                }}
-                strokeWidth="3.5"
-              />
+              <circle cx={x} cy={y} r="6" fill="currentColor" stroke="currentColor" className="text-white dark:text-slate-800 drop-shadow-sm" style={{ stroke: 'var(--tw-text-opacity, 1) rgba(245, 158, 11, 1)' }} strokeWidth="3.5" />
               {/* Text Outline for readability */}
-              <text
-                x={x}
-                y={y - 15}
-                textAnchor="middle"
-                fontSize="16"
-                fontWeight="900"
-                stroke="currentColor"
-                className="text-white dark:text-slate-800"
-                strokeWidth="4"
-                strokeLinejoin="round"
-              >
+              <text x={x} y={y - 15} textAnchor="middle" fontSize="16" fontWeight="900" stroke="currentColor" className="text-white dark:text-slate-800" strokeWidth="4" strokeLinejoin="round">
                 {d.total.toLocaleString()}
               </text>
-              <text
-                x={x}
-                y={y - 15}
-                textAnchor="middle"
-                fontSize="16"
-                fontWeight="900"
-                fill="currentColor"
-                className="text-slate-800 dark:text-slate-100"
-              >
+              <text x={x} y={y - 15} textAnchor="middle" fontSize="16" fontWeight="900" fill="currentColor" className="text-slate-800 dark:text-slate-100">
                 {d.total.toLocaleString()}
               </text>
               <g transform={`translate(${x}, ${height - 25})`}>
-                <text
-                  textAnchor="middle"
-                  fontSize="14"
-                  fontWeight="bold"
-                  fill="currentColor"
-                  className="text-slate-700 dark:text-slate-300"
-                >
-                  {thDate.m}
-                </text>
-                <text
-                  textAnchor="middle"
-                  y="18"
-                  fontSize="12"
-                  fontWeight="bold"
-                  fill="currentColor"
-                  className="text-slate-400 dark:text-slate-500"
-                >
-                  {thDate.y}
-                </text>
+                <text textAnchor="middle" fontSize="14" fontWeight="bold" fill="currentColor" className="text-slate-700 dark:text-slate-300">{thDate.m}</text>
+                <text textAnchor="middle" y="18" fontSize="12" fontWeight="bold" fill="currentColor" className="text-slate-400 dark:text-slate-500">{thDate.y}</text>
               </g>
             </g>
-          );
+          )
         })}
       </svg>
     </div>
@@ -1234,9 +1059,7 @@ const SearchableDropdown = ({
       </label>
       <div
         className={`w-full text-sm font-bold border rounded-xl p-3 outline-none cursor-pointer flex justify-between items-center transition-colors shadow-sm ${baseClass} ${
-          !isAllSelected
-            ? "ring-2 ring-indigo-400 dark:ring-indigo-500 ring-offset-1 dark:ring-offset-slate-900"
-            : ""
+          !isAllSelected ? "ring-2 ring-indigo-400 dark:ring-indigo-500 ring-offset-1 dark:ring-offset-slate-900" : ""
         }`}
         onClick={() => {
           setIsOpen(!isOpen);
@@ -1323,7 +1146,7 @@ export default function App() {
   const [fileName, setFileName] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [loadError, setLoadError] = useState("");
-
+  
   // Theme state
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -1395,39 +1218,32 @@ export default function App() {
     if (typeof window !== "undefined") {
       // ตรวจสอบ Theme เริ่มต้น
       const checkTheme = () => {
-        if (
-          localStorage.getItem("theme") === "dark" ||
-          (!("theme" in localStorage) &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-          document.documentElement.classList.add("dark");
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
           setIsDarkMode(true);
         } else {
-          document.documentElement.classList.remove("dark");
+          document.documentElement.classList.remove('dark');
           setIsDarkMode(false);
         }
       };
-
+      
       checkTheme();
 
       const setupTailwindConfig = () => {
         if ((window as any).tailwind) {
           (window as any).tailwind.config = {
-            darkMode: "class", // <--- จุดแก้ปัญหาที่ทำให้โหมดกลางคืนทำงานบน Vercel ได้
+            darkMode: 'class', // <--- จุดแก้ปัญหาที่ทำให้โหมดกลางคืนทำงานบน Vercel ได้
           };
         }
       };
 
       // ตรวจสอบว่ามี script tailwind หรือยัง
-      if (
-        document.getElementById("tailwind-script") ||
-        (window as any).tailwind
-      ) {
+      if (document.getElementById("tailwind-script") || (window as any).tailwind) {
         setupTailwindConfig();
         setIsTailwindLoaded(true);
         return;
       }
-
+      
       const script = document.createElement("script");
       script.id = "tailwind-script";
       script.src = "https://cdn.tailwindcss.com";
@@ -1441,12 +1257,12 @@ export default function App() {
 
   const toggleTheme = () => {
     if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
       setIsDarkMode(false);
     } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
       setIsDarkMode(true);
     }
   };
@@ -1544,9 +1360,7 @@ export default function App() {
 
       const proxies = [
         fetchUrl,
-        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(
-          fetchUrl
-        )}`,
+        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(fetchUrl)}`,
         `https://api.allorigins.win/raw?url=${encodeURIComponent(fetchUrl)}`,
       ];
 
@@ -1560,11 +1374,8 @@ export default function App() {
           if (res.ok) {
             const resText = await res.text();
             const lowerText = resText.trim().toLowerCase();
-            if (
-              lowerText.startsWith("<!doctype html>") ||
-              lowerText.startsWith("<html")
-            ) {
-              if (i === 0) authError = true;
+            if (lowerText.startsWith("<!doctype html>") || lowerText.startsWith("<html")) {
+              if (i === 0) authError = true; 
               continue;
             }
             text = resText;
@@ -1578,9 +1389,7 @@ export default function App() {
 
       if (!success) {
         if (authError) {
-          throw new Error(
-            "ลิงก์ Google Sheet ของคุณไม่ได้ตั้งค่า 'Publish to web' (เป็น Private)"
-          );
+          throw new Error("ลิงก์ Google Sheet ของคุณไม่ได้ตั้งค่า 'Publish to web' (เป็น Private)");
         } else {
           throw new Error("ถูกบล็อกการเชื่อมต่อ (CORS Error) หรือลิงก์หมดอายุ");
         }
@@ -1589,9 +1398,7 @@ export default function App() {
       setFileName("ดึงข้อมูลอัปเดตล่าสุดสำเร็จ");
       const parseSuccess = processCSVData(text, true);
       if (!parseSuccess) {
-        throw new Error(
-          "คอลัมน์ไม่ตรงกับระบบ กรุณาตรวจสอบหัวตาราง (Headers) ในไฟล์ของคุณ"
-        );
+        throw new Error("คอลัมน์ไม่ตรงกับระบบ กรุณาตรวจสอบหัวตาราง (Headers) ในไฟล์ของคุณ");
       }
     } catch (error: any) {
       console.error("Fetch Error:", error);
@@ -1603,8 +1410,7 @@ export default function App() {
   const processCSVData = (csvText: any, isAutoLoad = false) => {
     try {
       const parsedArray = csvToArray(csvText);
-      if (parsedArray.length < 2)
-        throw new Error("ไฟล์ว่างเปล่าหรือมีรูปแบบไม่ถูกต้อง");
+      if (parsedArray.length < 2) throw new Error("ไฟล์ว่างเปล่าหรือมีรูปแบบไม่ถูกต้อง");
 
       const headers = parsedArray[0].map((h: any) => (h ? h.trim() : ""));
       const records: any[] = [];
@@ -1612,30 +1418,8 @@ export default function App() {
 
       const monthHeaderIndices: any[] = [];
       const monthNames = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-        "ก.ย.",
-        "ต.ค.",
-        "พ.ย.",
-        "ธ.ค.",
-        "ม.ค.",
-        "ก.พ.",
-        "มี.ค.",
-        "เม.ย.",
-        "พ.ค.",
-        "มิ.ย.",
-        "ก.ค.",
-        "ส.ค.",
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.",
       ];
 
       headers.forEach((h: any, index: any) => {
@@ -1653,15 +1437,16 @@ export default function App() {
         }
       });
 
-      if (monthHeaderIndices.length > 0 && !headers.includes("Ticket Number")) {
+      if (
+        monthHeaderIndices.length > 0 &&
+        !headers.includes("Ticket Number")
+      ) {
         let categoryColIndex = 0;
         headers.forEach((h: any, index: any) => {
           const lowerH = h.toLowerCase();
           if (
-            lowerH.includes("product") ||
-            lowerH.includes("equipment") ||
-            lowerH.includes("ประเภท") ||
-            lowerH.includes("อาการ")
+            lowerH.includes("product") || lowerH.includes("equipment") ||
+            lowerH.includes("ประเภท") || lowerH.includes("อาการ")
           ) {
             categoryColIndex = index;
           }
@@ -1716,11 +1501,10 @@ export default function App() {
           });
         });
       } else {
-        const hasStandardColumns = headers.some(
-          (h: any) =>
-            h.toLowerCase().includes("ticket") ||
-            h.toLowerCase().includes("product") ||
-            h.toLowerCase().includes("month")
+        const hasStandardColumns = headers.some((h: any) => 
+          h.toLowerCase().includes("ticket") || 
+          h.toLowerCase().includes("product") || 
+          h.toLowerCase().includes("month")
         );
 
         if (!hasStandardColumns && !isAutoLoad) {
@@ -1744,9 +1528,7 @@ export default function App() {
 
           const findCol = (keywords: any) => {
             for (let k of keywords) {
-              const matchedHeader = headers.find((h: any) =>
-                h.toLowerCase().includes(k.toLowerCase())
-              );
+              const matchedHeader = headers.find((h: any) => h.toLowerCase().includes(k.toLowerCase()));
               if (matchedHeader) return record[matchedHeader];
             }
             return null;
@@ -1754,22 +1536,13 @@ export default function App() {
 
           const mappedRecord = {
             id: findCol(["Ticket Number", "Ticket", "ID"]) || `ID-${i}`,
-            rawCreateDate:
-              findCol(["Create Date", "Date", "วันที่"]) || "ไม่ได้ระบุ",
+            rawCreateDate: findCol(["Create Date", "Date", "วันที่"]) || "ไม่ได้ระบุ",
             equipment: findCol(["Equipment", "รหัสอุปกรณ์"]) || "ไม่ได้ระบุ",
-            month: normalizeMonthString(
-              findCol(["Month", "เดือน"]) || "Unknown"
-            ),
-            product:
-              findCol(["Product Type", "Product", "กลุ่มสินค้า"]) ||
-              getValue("Product Type"),
-            problem:
-              findCol(["Problem Type", "Problem", "อาการเสีย"]) ||
-              getValue("Problem Type"),
+            month: normalizeMonthString(findCol(["Month", "เดือน"]) || "Unknown"),
+            product: findCol(["Product Type", "Product", "กลุ่มสินค้า"]) || getValue("Product Type"),
+            problem: findCol(["Problem Type", "Problem", "อาการเสีย"]) || getValue("Problem Type"),
             system: findCol(["System", "ระบบ"]) || getValue("System"),
-            damagedPart:
-              findCol(["Damaged Parts", "Part", "ชิ้นส่วน"]) ||
-              getValue("Damaged Parts (ชิ้นส่วนที่เสียหาย)"),
+            damagedPart: findCol(["Damaged Parts", "Part", "ชิ้นส่วน"]) || getValue("Damaged Parts (ชิ้นส่วนที่เสียหาย)"),
             cause: findCol(["Cause", "สาเหตุ"]) || getValue("Cause สาเหตุ"),
             area: findCol(["Area", "พื้นที่"]) || getValue("Area"),
             team: findCol(["Team", "ทีม"]) || getValue("Team"),
@@ -1779,11 +1552,8 @@ export default function App() {
           };
 
           if (mappedRecord) records.push(mappedRecord);
-
-          if (
-            mappedRecord.storeCode &&
-            !branchMap.has(mappedRecord.storeCode)
-          ) {
+          
+          if (mappedRecord.storeCode && !branchMap.has(mappedRecord.storeCode)) {
             branchMap.set(mappedRecord.storeCode, {
               id: mappedRecord.storeCode,
               name: mappedRecord.storeName,
@@ -1794,18 +1564,17 @@ export default function App() {
         });
       }
 
-      if (records.length === 0)
-        throw new Error("ไม่พบข้อมูลที่จะนำมาสร้างกราฟได้");
+      if (records.length === 0) throw new Error("ไม่พบข้อมูลที่จะนำมาสร้างกราฟได้");
 
       // เปลี่ยนจากการใช้ ...new Set() ตรงๆ เป็น Array.from() เพื่อแก้ปัญหา TypeScript (ts 2802)
       const getUnique = (key: any) =>
         Array.from(new Set(records.map((r: any) => r[key]))).filter(
           (v: any) => v !== "ไม่ได้ระบุ" && v !== "Unknown"
         );
-
-      const rawMonths = Array.from(
-        new Set(records.map((r: any) => r.month))
-      ).filter((m: any) => m !== "Unknown");
+      
+      const rawMonths = Array.from(new Set(records.map((r: any) => r.month))).filter(
+        (m: any) => m !== "Unknown"
+      );
 
       const branches = Array.from(branchMap.values());
       if (branches.length === 0) {
@@ -1857,7 +1626,7 @@ export default function App() {
     const areaSet = filterArea.length > 0 ? new Set(filterArea) : null;
     const teamSet = filterTeam.length > 0 ? new Set(filterTeam) : null;
     const monthSet = filterMonth.length > 0 ? new Set(filterMonth) : null;
-
+    
     // เปลี่ยนมาใช้ .filter แทน for loop ช่วยเลี่ยง Loop Protector ของ CodeSandbox ได้ 100%
     return rawData.filter((rec: any) => {
       if (productSet && !productSet.has(rec.product)) return false;
@@ -1888,7 +1657,7 @@ export default function App() {
       (f) => crossFilters[f] && crossFilters[f].size > 0
     );
     if (activeFields.length === 0) return globalFilteredRecords;
-
+    
     // ใช้ .filter และ .every เพื่อให้ปลอดภัยจาก CodeSandbox Loop Limits
     return globalFilteredRecords.filter((r: any) => {
       return activeFields.every((f) => crossFilters[f].has(r[f]));
@@ -1896,11 +1665,7 @@ export default function App() {
   }, [globalFilteredRecords, crossFilters]);
 
   const totalCallsCount = useMemo(
-    () =>
-      dashboardFilteredRecords.reduce(
-        (acc: any, curr: any) => acc + curr.calls,
-        0
-      ),
+    () => dashboardFilteredRecords.reduce((acc: any, curr: any) => acc + curr.calls, 0),
     [dashboardFilteredRecords]
   );
 
@@ -1908,7 +1673,7 @@ export default function App() {
     if (!isDataLoaded || dynamicLists.months.length === 0) return 1;
     const latestMonth = dynamicLists.months[dynamicLists.months.length - 1];
     let maxDay = 1;
-
+    
     // เปลี่ยนจาก for loop เป็น forEach
     rawData.forEach((r: any) => {
       if (r.month === latestMonth && r.rawCreateDate) {
@@ -1927,12 +1692,10 @@ export default function App() {
     const months = dynamicLists.months;
     const numMonths = months.length;
     const monthToIndex: any = {};
-
+    
     // เปลี่ยนจาก for loop เป็น forEach
-    months.forEach((m: any, i: number) => {
-      monthToIndex[m] = i;
-    });
-
+    months.forEach((m: any, i: number) => { monthToIndex[m] = i; });
+    
     const fields = [
       "product",
       "problem",
@@ -1942,16 +1705,11 @@ export default function App() {
       "area",
       "team",
     ];
-    const activeFields = fields.filter(
-      (f) => crossFilters[f] && crossFilters[f].size > 0
-    );
-    const activeStoreFilters =
-      crossFilters["storeCode"] && crossFilters["storeCode"].size > 0;
+    const activeFields = fields.filter((f) => crossFilters[f] && crossFilters[f].size > 0);
+    const activeStoreFilters = crossFilters["storeCode"] && crossFilters["storeCode"].size > 0;
     const structures: any = {};
-
-    fields.forEach((f) => {
-      structures[f] = {};
-    });
+    
+    fields.forEach(f => { structures[f] = {}; });
     structures["storeCode"] = {};
 
     // เปลี่ยนมาใช้ .forEach ร่วมกับ .every แทน For Loop ป้องกันการถูก Sandbox ตัดจบ
@@ -1960,14 +1718,12 @@ export default function App() {
       const hasValidMonth = mIdx !== undefined;
 
       fields.forEach((field) => {
-        let passesOthers = activeFields.every(
-          (af) => af === field || crossFilters[af].has(r[af])
-        );
-
+        let passesOthers = activeFields.every((af) => af === field || crossFilters[af].has(r[af]));
+        
         if (passesOthers && activeStoreFilters && field !== "storeCode") {
           if (!crossFilters["storeCode"].has(r.storeCode)) passesOthers = false;
         }
-
+        
         if (passesOthers) {
           const val = r[field];
           let itemStats = structures[field][val];
@@ -1975,10 +1731,7 @@ export default function App() {
             itemStats = structures[field][val] = {
               total: 0,
               monthly: new Array(numMonths).fill(0),
-              monthlyStores: Array.from(
-                { length: numMonths },
-                () => new SimulatedSet()
-              ),
+              monthlyStores: Array.from({ length: numMonths }, () => new SimulatedSet()),
             };
           }
           itemStats.total += r.calls;
@@ -1993,10 +1746,8 @@ export default function App() {
         }
       });
 
-      let storePassesOthers = activeFields.every((af) =>
-        crossFilters[af].has(r[af])
-      );
-
+      let storePassesOthers = activeFields.every((af) => crossFilters[af].has(r[af]));
+      
       if (storePassesOthers) {
         const storeVal = r.storeCode;
         let storeStats = structures["storeCode"][storeVal];
@@ -2074,12 +1825,10 @@ export default function App() {
             calls: calls,
             percentage:
               totalMonth > 0 ? ((calls / totalMonth) * 100).toFixed(1) : "0.0",
-            branchCount: data?.monthlyStores
-              ? data.monthlyStores[idx]?.size
-              : 0,
+            branchCount: data?.monthlyStores ? data.monthlyStores[idx]?.size : 0,
           });
         });
-
+        
         return {
           name,
           total: data?.total || 0,
@@ -2131,12 +1880,12 @@ export default function App() {
       sMap: any = {};
     const numMonths = dynamicLists.months.length;
     const monthToIndex: any = {};
-
+    
     // เปลี่ยนมาใช้ .forEach() แทน For Loop
     dynamicLists.months.forEach((m: any, i: number) => {
       monthToIndex[m] = i;
     });
-
+      
     // เปลี่ยนมาใช้ .forEach() แทน For Loop
     dashboardFilteredRecords.forEach((r: any) => {
       const mIdx = monthToIndex[r.month];
@@ -2185,7 +1934,7 @@ export default function App() {
     if (!isDataLoaded || !aggregatedStats["storeCode"]) return [];
     const storeStats = aggregatedStats["storeCode"];
     const result: any[] = [];
-
+    
     // เปลี่ยน for ให้ปลอดภัย
     dynamicLists.branches.forEach((b: any) => {
       if (b && b.id) {
@@ -2206,7 +1955,7 @@ export default function App() {
     arr.forEach((b, i) => {
       if (b) b.rank = i + 1;
     });
-
+    
     if (branchSearch) {
       const s = branchSearch.toLowerCase();
       arr = arr.filter(
@@ -2230,9 +1979,7 @@ export default function App() {
   const monthlySummaryData = useMemo(() => {
     if (!isDataLoaded) return [];
     return dynamicLists.months.map((m: any) => {
-      const filtered = dashboardFilteredRecords.filter(
-        (r: any) => r.month === m
-      );
+      const filtered = dashboardFilteredRecords.filter((r: any) => r.month === m);
       const total = filtered.reduce((sum: any, r: any) => sum + r.calls, 0);
       return { month: m, total: total };
     });
@@ -2240,55 +1987,14 @@ export default function App() {
 
   const renderDropdowns = () => {
     const configs = [
-      {
-        label: "กลุ่มผลิตภัณฑ์",
-        opts: dynamicLists.products,
-        sel: filterProduct,
-        set: setFilterProduct,
-      },
-      {
-        label: "อาการเสีย",
-        opts: dynamicLists.problems,
-        sel: filterProblem,
-        set: setFilterProblem,
-      },
-      {
-        label: "สาเหตุอาการ",
-        opts: dynamicLists.causes,
-        sel: filterCause,
-        set: setFilterCause,
-      },
-      {
-        label: "ชิ้นส่วนที่เสีย",
-        opts: dynamicLists.damagedParts,
-        sel: filterDamagedPart,
-        set: setFilterDamagedPart,
-      },
-      {
-        label: "ระบบ",
-        opts: dynamicLists.systems,
-        sel: filterSystem,
-        set: setFilterSystem,
-      },
-      {
-        label: "พื้นที่",
-        opts: dynamicLists.areas,
-        sel: filterArea,
-        set: setFilterArea,
-      },
-      {
-        label: "ทีม",
-        opts: dynamicLists.teams,
-        sel: filterTeam,
-        set: setFilterTeam,
-      },
-      {
-        label: "เลือกเดือน",
-        opts: dynamicLists.months,
-        sel: filterMonth,
-        set: setFilterMonth,
-        highlight: true,
-      },
+      { label: "กลุ่มผลิตภัณฑ์", opts: dynamicLists.products, sel: filterProduct, set: setFilterProduct },
+      { label: "อาการเสีย", opts: dynamicLists.problems, sel: filterProblem, set: setFilterProblem },
+      { label: "สาเหตุอาการ", opts: dynamicLists.causes, sel: filterCause, set: setFilterCause },
+      { label: "ชิ้นส่วนที่เสีย", opts: dynamicLists.damagedParts, sel: filterDamagedPart, set: setFilterDamagedPart },
+      { label: "ระบบ", opts: dynamicLists.systems, sel: filterSystem, set: setFilterSystem },
+      { label: "พื้นที่", opts: dynamicLists.areas, sel: filterArea, set: setFilterArea },
+      { label: "ทีม", opts: dynamicLists.teams, sel: filterTeam, set: setFilterTeam },
+      { label: "เลือกเดือน", opts: dynamicLists.months, sel: filterMonth, set: setFilterMonth, highlight: true },
     ];
     return configs.map((cfg: any, i: any) => (
       <SearchableDropdown
@@ -2307,18 +2013,13 @@ export default function App() {
     const limit = rowLimits[tableDef.id] || 15;
     const visibleRows = (tableDef.data || []).slice(0, limit);
     const hasMore = (tableDef.data || []).length > limit;
-    const grandTotal = (tableDef.data || []).reduce(
-      (acc: any, row: any) => acc + (row?.total || 0),
-      0
-    );
+    const grandTotal = (tableDef.data || []).reduce((acc: any, row: any) => acc + (row?.total || 0), 0);
     const grandMonthly = Array(dynamicLists.months.length).fill(0);
     let grandForecast = 0;
 
     (tableDef.data || []).forEach((row: any) => {
-      if (!row) return; // 🔥 ป้องกัน Row เป็น undefined
-      (row?.monthly || []).forEach(
-        (val: any, i: any) => (grandMonthly[i] += val)
-      );
+      if(!row) return; // 🔥 ป้องกัน Row เป็น undefined
+      (row?.monthly || []).forEach((val: any, i: any) => (grandMonthly[i] += val));
       grandForecast += row?.forecast || 0;
     });
 
@@ -2384,31 +2085,12 @@ export default function App() {
                         className="px-2 py-5 min-w-[70px] text-center leading-tight"
                       >
                         <div className="text-base">{thDate.m}</div>
-                        <div className="text-xs mt-1 text-slate-500 dark:text-slate-400">
-                          {thDate.y}
-                        </div>
+                        <div className="text-xs mt-1 text-slate-500 dark:text-slate-400">{thDate.y}</div>
                       </th>
                     );
                   })}
                   <th className="px-3 py-5 border-l border-slate-200 dark:border-slate-700 min-w-[100px] text-center leading-tight whitespace-pre-line">
                     {getTrendHeader()}
-                  </th>
-                  {dynamicLists.months.map((m: any) => {
-                    const thDate = formatMonthThaiSplit(m);
-                    return (
-                      <th
-                        key={m}
-                        className="px-2 py-4 min-w-[70px] text-center leading-tight"
-                      >
-                        <div className="text-[13px]">{thDate.m}</div>
-                        <div className="text-[11px] mt-0.5 text-slate-500">
-                          {thDate.y}
-                        </div>
-                      </th>
-                    );
-                  })}
-                  <th className="px-2 py-4 border-l border-slate-200 dark:border-slate-700 min-w-[80px] text-center leading-tight whitespace-pre-line">
-                    <div className="text-[12px]">{getTrendHeader()}</div>
                   </th>
                   <th className="px-3 py-4 bg-indigo-50/40 dark:bg-indigo-900/20 border-l border-slate-200 dark:border-slate-700 min-w-[100px] text-center leading-tight text-[#1e3a8a] dark:text-indigo-300 font-extrabold">
                     <div className="text-[13px]">ประมาณการ</div>
@@ -2435,9 +2117,7 @@ export default function App() {
                       <tr
                         key={idx}
                         className={`border-b border-slate-100 dark:border-slate-700/50 hover:bg-indigo-50/50 dark:hover:bg-slate-700/50 transition-all cursor-pointer group ${
-                          isCrossFiltered
-                            ? "bg-indigo-50/40 dark:bg-indigo-900/30 font-bold"
-                            : ""
+                          isCrossFiltered ? "bg-indigo-50/40 dark:bg-indigo-900/30 font-bold" : ""
                         }`}
                         onClick={() => {
                           setCrossFilters((prev: any) => {
@@ -2446,7 +2126,7 @@ export default function App() {
                               next[tableDef.keyField] || []
                             );
                             if (newSet.has(row?.name)) newSet.delete(row?.name);
-                            else if (row?.name) newSet.add(row?.name);
+                            else if(row?.name) newSet.add(row?.name);
                             next[tableDef.keyField] = newSet;
                             return next;
                           });
@@ -2475,51 +2155,47 @@ export default function App() {
                             ({row?.percentage || 0}%)
                           </div>
                         </td>
-                        {(row?.monthlyDetails || []).map(
-                          (detail: any, mIdx: any) => {
-                            const colors = getHeatmapCellClasses(
-                              detail?.calls || 0,
-                              maxVal
-                            );
-                            return (
-                              <td
-                                key={mIdx}
-                                className={`px-2 py-4 text-center transition-colors ${
-                                  isCrossFiltered && detail?.calls > 0
-                                    ? "bg-[#fda4af] dark:bg-rose-800/60"
-                                    : colors.bg
-                                }`}
-                              >
-                                {(detail?.calls || 0) > 0 ? (
-                                  <>
-                                    <div
-                                      className={`font-extrabold text-[14px] leading-none ${
-                                        isCrossFiltered
-                                          ? "text-[#881337] dark:text-rose-100"
-                                          : colors.textMain
-                                      }`}
-                                    >
-                                      {(detail?.calls || 0).toLocaleString()}
-                                    </div>
-                                    <div
-                                      className={`font-medium text-[11px] mt-1.5 ${
-                                        isCrossFiltered
-                                          ? "text-[#be123c] dark:text-rose-300"
-                                          : colors.textSub
-                                      }`}
-                                    >
-                                      ({detail?.percentage || 0}%)
-                                    </div>
-                                  </>
-                                ) : (
-                                  <div className="text-slate-300 dark:text-slate-600">
-                                    -
+                        {(row?.monthlyDetails || []).map((detail: any, mIdx: any) => {
+                          const colors = getHeatmapCellClasses(
+                            detail?.calls || 0,
+                            maxVal
+                          );
+                          return (
+                            <td
+                              key={mIdx}
+                              className={`px-2 py-4 text-center transition-colors ${
+                                isCrossFiltered && detail?.calls > 0
+                                  ? "bg-[#fda4af] dark:bg-rose-800/60"
+                                  : colors.bg
+                              }`}
+                            >
+                              {(detail?.calls || 0) > 0 ? (
+                                <>
+                                  <div
+                                    className={`font-extrabold text-[14px] leading-none ${
+                                      isCrossFiltered
+                                        ? "text-[#881337] dark:text-rose-100"
+                                        : colors.textMain
+                                    }`}
+                                  >
+                                    {(detail?.calls || 0).toLocaleString()}
                                   </div>
-                                )}
-                              </td>
-                            );
-                          }
-                        )}
+                                  <div
+                                    className={`font-medium text-[11px] mt-1.5 ${
+                                      isCrossFiltered
+                                        ? "text-[#be123c] dark:text-rose-300"
+                                        : colors.textSub
+                                    }`}
+                                  >
+                                    ({detail?.percentage || 0}%)
+                                  </div>
+                                </>
+                              ) : (
+                                <div className="text-slate-300 dark:text-slate-600">-</div>
+                              )}
+                            </td>
+                          );
+                        })}
                         <td className="px-2 py-4 text-center font-extrabold text-[13px] bg-transparent border-l border-slate-100 dark:border-slate-700/50">
                           <div
                             className={`${
@@ -2666,37 +2342,9 @@ export default function App() {
   // เพื่อป้องกัน FOUC (Flash of Unstyled Content) บน Vercel
   if (!isTailwindLoaded) {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          minHeight: "100vh",
-          backgroundColor: "#f8fafc",
-          fontFamily: "sans-serif",
-        }}
-      >
-        <div
-          style={{
-            width: "50px",
-            height: "50px",
-            border: "5px solid #e2e8f0",
-            borderTopColor: "#4f46e5",
-            borderRadius: "50%",
-            animation: "spin 1s linear infinite",
-          }}
-        ></div>
-        <h2
-          style={{
-            marginTop: "20px",
-            color: "#475569",
-            fontSize: "18px",
-            fontWeight: "bold",
-          }}
-        >
-          กำลังโหลดระบบ CSS...
-        </h2>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: 'sans-serif' }}>
+        <div style={{ width: '50px', height: '50px', border: '5px solid #e2e8f0', borderTopColor: '#4f46e5', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+        <h2 style={{ marginTop: '20px', color: '#475569', fontSize: '18px', fontWeight: 'bold' }}>กำลังโหลดระบบ CSS...</h2>
         <style>
           {`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
           {`
@@ -2749,14 +2397,12 @@ export default function App() {
               ระบบดึงข้อมูลจาก Google Sheet ล้มเหลว โปรดเลือกวิธีใช้งานด้านล่าง
             </p>
           </div>
-
+          
           {loadError && (
             <div className="mb-8 p-5 bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/50 rounded-2xl flex items-start gap-4 shadow-sm">
               <AlertTriangle className="w-6 h-6 text-rose-500 dark:text-rose-400 flex-shrink-0 mt-0.5" />
               <div className="text-left">
-                <p className="text-sm font-black text-rose-800 dark:text-rose-300 mb-1">
-                  สาเหตุที่หน้าเว็บไม่โหลด:
-                </p>
+                <p className="text-sm font-black text-rose-800 dark:text-rose-300 mb-1">สาเหตุที่หน้าเว็บไม่โหลด:</p>
                 <p className="text-sm font-semibold text-rose-700 dark:text-rose-400 leading-relaxed">
                   {loadError}
                 </p>
@@ -2767,12 +2413,8 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 text-center hover:shadow-md transition-all">
               <UploadCloud className="w-10 h-10 text-slate-400 dark:text-slate-500 mx-auto mb-3" />
-              <h3 className="font-bold text-slate-700 dark:text-slate-200 mb-2">
-                มีไฟล์ข้อมูลของตัวเอง?
-              </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 h-10">
-                อัปโหลดไฟล์ CSV ที่มีโครงสร้างตรงกับระบบ
-              </p>
+              <h3 className="font-bold text-slate-700 dark:text-slate-200 mb-2">มีไฟล์ข้อมูลของตัวเอง?</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 h-10">อัปโหลดไฟล์ CSV ที่มีโครงสร้างตรงกับระบบ</p>
               <input
                 type="file"
                 accept=".csv"
@@ -2790,16 +2432,10 @@ export default function App() {
             </div>
 
             <div className="bg-indigo-50 dark:bg-indigo-900/30 border border-indigo-100 dark:border-indigo-800/50 rounded-2xl p-6 text-center hover:shadow-md transition-all relative overflow-hidden">
-              <div className="absolute -top-3 -right-3 bg-rose-500 text-white text-[10px] font-black px-3 py-1 rounded-full shadow-sm transform rotate-12">
-                แนะนำ!
-              </div>
+              <div className="absolute -top-3 -right-3 bg-rose-500 text-white text-[10px] font-black px-3 py-1 rounded-full shadow-sm transform rotate-12">แนะนำ!</div>
               <PlayCircle className="w-10 h-10 text-indigo-500 dark:text-indigo-400 mx-auto mb-3" />
-              <h3 className="font-bold text-indigo-900 dark:text-indigo-300 mb-2">
-                ยังไม่มีไฟล์? ลองใช้ตัวอย่าง
-              </h3>
-              <p className="text-xs text-indigo-600/80 dark:text-indigo-400/80 mb-4 h-10">
-                กดดูหน้าตา Dashboard ใช้งานได้ 100% ด้วยข้อมูลจำลอง
-              </p>
+              <h3 className="font-bold text-indigo-900 dark:text-indigo-300 mb-2">ยังไม่มีไฟล์? ลองใช้ตัวอย่าง</h3>
+              <p className="text-xs text-indigo-600/80 dark:text-indigo-400/80 mb-4 h-10">กดดูหน้าตา Dashboard ใช้งานได้ 100% ด้วยข้อมูลจำลอง</p>
               <button
                 onClick={handleLoadDemoData}
                 disabled={isProcessing}
@@ -2809,6 +2445,7 @@ export default function App() {
               </button>
             </div>
           </div>
+
         </div>
       </div>
     );
@@ -2827,10 +2464,7 @@ export default function App() {
   );
   const grandBranchMonthly = Array(dynamicLists.months.length).fill(0);
   branchTableData.forEach((row: any) => {
-    if (row)
-      (row?.monthly || []).forEach(
-        (val: any, i: any) => (grandBranchMonthly[i] += val)
-      );
+    if(row) (row?.monthly || []).forEach((val: any, i: any) => (grandBranchMonthly[i] += val));
   });
 
   return (
@@ -2846,20 +2480,8 @@ export default function App() {
                 ระบบรายงาน Call MAINTENANCE DASHBOARD
               </h1>
               <div className="flex items-center gap-2 mt-1">
-                <span
-                  className={`text-xs px-3 py-1 rounded-lg flex items-center gap-1.5 font-bold ${
-                    fileName.includes("ตัวอย่าง")
-                      ? "bg-amber-500/20 text-amber-300"
-                      : "bg-indigo-800/60 dark:bg-indigo-900/80 text-indigo-100"
-                  }`}
-                >
-                  <CheckCircle
-                    className={`w-4 h-4 flex-shrink-0 ${
-                      fileName.includes("ตัวอย่าง")
-                        ? "text-amber-400"
-                        : "text-emerald-400"
-                    }`}
-                  />
+                <span className={`text-xs px-3 py-1 rounded-lg flex items-center gap-1.5 font-bold ${fileName.includes('ตัวอย่าง') ? 'bg-amber-500/20 text-amber-300' : 'bg-indigo-800/60 dark:bg-indigo-900/80 text-indigo-100'}`}>
+                  <CheckCircle className={`w-4 h-4 flex-shrink-0 ${fileName.includes('ตัวอย่าง') ? 'text-amber-400' : 'text-emerald-400'}`} />
                   {fileName}
                 </span>
               </div>
@@ -2893,11 +2515,7 @@ export default function App() {
               className="bg-slate-800/80 dark:bg-slate-800 p-3 rounded-2xl border border-slate-700/60 dark:border-slate-700 shadow-lg text-amber-400 dark:text-indigo-300 hover:bg-slate-700 transition-colors"
               title="Toggle Dark Mode"
             >
-              {isDarkMode ? (
-                <Sun className="w-6 h-6" />
-              ) : (
-                <Moon className="w-6 h-6" />
-              )}
+              {isDarkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -3066,10 +2684,7 @@ export default function App() {
                           รวม CALL
                         </th>
                         {dynamicLists.months.map((m: any) => (
-                          <th
-                            key={m}
-                            className="px-2 py-4 text-center min-w-[60px]"
-                          >
+                          <th key={m} className="px-2 py-4 text-center min-w-[60px]">
                             {formatMonthThaiSplit(m).m}
                           </th>
                         ))}
@@ -3101,7 +2716,7 @@ export default function App() {
                                   );
                                   if (newSet.has(branch?.id))
                                     newSet.delete(branch?.id);
-                                  else if (branch?.id) newSet.add(branch?.id);
+                                  else if(branch?.id) newSet.add(branch?.id);
                                   next["storeCode"] = newSet;
                                   return next;
                                 });
@@ -3131,9 +2746,7 @@ export default function App() {
                                   {isCrossFiltered && (
                                     <span className="w-3 h-3 bg-indigo-600 dark:bg-indigo-500 rounded-full animate-pulse flex-shrink-0"></span>
                                   )}
-                                  <span className="text-base">
-                                    {branch?.id}
-                                  </span>
+                                  <span className="text-base">{branch?.id}</span>
                                 </div>
                               </td>
                               <td
@@ -3155,36 +2768,30 @@ export default function App() {
                               <td className="px-4 py-4 text-center font-black text-lg bg-transparent text-[#1e3a8a] dark:text-indigo-300">
                                 {(branch?.total || 0).toLocaleString()}
                               </td>
-                              {(branch?.monthly || []).map(
-                                (val: any, mIdx: any) => {
-                                  const colors = getHeatmapCellClasses(
-                                    val || 0,
-                                    Math.max(maxVal, 5)
-                                  );
-                                  return (
-                                    <td
-                                      key={mIdx}
-                                      className={`px-2 py-4 text-center font-extrabold text-sm transition-colors print:border-l ${
-                                        isCrossFiltered && val > 0
-                                          ? "bg-[#fda4af] dark:bg-rose-800/60 text-[#881337] dark:text-rose-100"
-                                          : colors.bg
-                                      } ${
-                                        !isCrossFiltered && val > 0
-                                          ? colors.textMain
-                                          : ""
-                                      } ${
-                                        !val
-                                          ? "text-slate-300 dark:text-slate-600"
-                                          : ""
-                                      }`}
-                                    >
-                                      {val > 0
-                                        ? (val || 0).toLocaleString()
-                                        : "-"}
-                                    </td>
-                                  );
-                                }
-                              )}
+                              {(branch?.monthly || []).map((val: any, mIdx: any) => {
+                                const colors = getHeatmapCellClasses(
+                                  val || 0,
+                                  Math.max(maxVal, 5)
+                                );
+                                return (
+                                  <td
+                                    key={mIdx}
+                                    className={`px-2 py-4 text-center font-extrabold text-sm transition-colors print:border-l ${
+                                      isCrossFiltered && val > 0
+                                        ? "bg-[#fda4af] dark:bg-rose-800/60 text-[#881337] dark:text-rose-100"
+                                        : colors.bg
+                                    } ${
+                                      !isCrossFiltered && val > 0
+                                        ? colors.textMain
+                                        : ""
+                                    } ${!val ? "text-slate-300 dark:text-slate-600" : ""}`}
+                                  >
+                                    {val > 0
+                                      ? (val || 0).toLocaleString()
+                                      : "-"}
+                                  </td>
+                                );
+                              })}
                             </tr>
                           );
                         })
@@ -3294,10 +2901,8 @@ export default function App() {
             </h3>
             <p className="text-sm font-medium text-slate-500 dark:text-slate-400 border-b border-slate-100 dark:border-slate-700 pb-5 mb-8">
               สถานะปัจจุบัน: ดึงข้อมูลจาก{" "}
-              <span className="font-extrabold text-indigo-600 dark:text-indigo-400">
-                {fileName}
-              </span>{" "}
-              ({(rawData || []).length.toLocaleString()} แถว)
+              <span className="font-extrabold text-indigo-600 dark:text-indigo-400">{fileName}</span> (
+              {(rawData || []).length.toLocaleString()} แถว)
             </p>
             <div className="space-y-6">
               <div className="bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
@@ -3325,12 +2930,12 @@ export default function App() {
                     <PlayCircle className="w-5 h-5" /> สร้างข้อมูลจำลอง (Demo)
                   </button>
                 </div>
-                {isProcessing && (
-                  <span className="text-sm font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2 mt-4">
-                    <RefreshCw className="w-4 h-4 animate-spin" />{" "}
-                    กำลังประมวลผล...
-                  </span>
-                )}
+                  {isProcessing && (
+                    <span className="text-sm font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2 mt-4">
+                      <RefreshCw className="w-4 h-4 animate-spin" />{" "}
+                      กำลังประมวลผล...
+                    </span>
+                  )}
               </div>
             </div>
           </div>
