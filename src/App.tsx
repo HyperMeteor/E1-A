@@ -1252,6 +1252,9 @@ export default function App() {
 
   const hasAutoFetched = useRef(false);
 
+  // เพิ่ม State ตรวจสอบการโหลด CSS Tailwind
+  const [isTailwindLoaded, setIsTailwindLoaded] = useState(false);
+
   const [dynamicLists, setDynamicLists] = useState<any>({
     months: [],
     products: [],
@@ -1309,13 +1312,22 @@ export default function App() {
   });
 
   useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      !document.getElementById("tailwind-script")
-    ) {
+    if (typeof window !== "undefined") {
+      // ตรวจสอบว่ามี script tailwind หรือยัง
+      if (
+        document.getElementById("tailwind-script") ||
+        (window as any).tailwind
+      ) {
+        setIsTailwindLoaded(true);
+        return;
+      }
+
       const script = document.createElement("script");
       script.id = "tailwind-script";
       script.src = "https://cdn.tailwindcss.com";
+      script.onload = () => {
+        setIsTailwindLoaded(true);
+      };
       document.head.appendChild(script);
     }
   }, []);
@@ -2526,6 +2538,48 @@ export default function App() {
   // ==========================================
   // 4. หน้า Loading & หน้า Error
   // ==========================================
+
+  // ✨ ถ้ายังโหลด Tailwind CSS (CDN) ไม่เสร็จ ให้โชว์หน้า Loading เล็กๆ ที่มี Inline Style ก่อน
+  // เพื่อป้องกัน FOUC (Flash of Unstyled Content) บน Vercel
+  if (!isTailwindLoaded) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+          backgroundColor: "#f8fafc",
+          fontFamily: "sans-serif",
+        }}
+      >
+        <div
+          style={{
+            width: "50px",
+            height: "50px",
+            border: "5px solid #e2e8f0",
+            borderTopColor: "#4f46e5",
+            borderRadius: "50%",
+            animation: "spin 1s linear infinite",
+          }}
+        ></div>
+        <h2
+          style={{
+            marginTop: "20px",
+            color: "#475569",
+            fontSize: "18px",
+            fontWeight: "bold",
+          }}
+        >
+          กำลังโหลดระบบ CSS...
+        </h2>
+        <style>
+          {`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
+        </style>
+      </div>
+    );
+  }
 
   if (!isDataLoaded) {
     if (isProcessing) {
