@@ -1410,27 +1410,29 @@ export default function App() {
 
       checkTheme();
 
+      const setupTailwindConfig = () => {
+        if ((window as any).tailwind) {
+          (window as any).tailwind.config = {
+            darkMode: "class", // <--- จุดแก้ปัญหาที่ทำให้โหมดกลางคืนทำงานบน Vercel ได้
+          };
+        }
+      };
+
       // ตรวจสอบว่ามี script tailwind หรือยัง
       if (
         document.getElementById("tailwind-script") ||
         (window as any).tailwind
       ) {
+        setupTailwindConfig();
         setIsTailwindLoaded(true);
         return;
       }
-
-      // Inject Anti-Flicker Script & Config
-      const style = document.createElement("style");
-      style.type = "text/tailwindcss";
-      style.innerHTML = `
-        @custom-variant dark (&:where(.dark, .dark *));
-      `;
-      document.head.appendChild(style);
 
       const script = document.createElement("script");
       script.id = "tailwind-script";
       script.src = "https://cdn.tailwindcss.com";
       script.onload = () => {
+        setupTailwindConfig();
         setIsTailwindLoaded(true);
       };
       document.head.appendChild(script);
@@ -2390,6 +2392,23 @@ export default function App() {
                   })}
                   <th className="px-3 py-5 border-l border-slate-200 dark:border-slate-700 min-w-[100px] text-center leading-tight whitespace-pre-line">
                     {getTrendHeader()}
+                  </th>
+                  {dynamicLists.months.map((m: any) => {
+                    const thDate = formatMonthThaiSplit(m);
+                    return (
+                      <th
+                        key={m}
+                        className="px-2 py-4 min-w-[70px] text-center leading-tight"
+                      >
+                        <div className="text-[13px]">{thDate.m}</div>
+                        <div className="text-[11px] mt-0.5 text-slate-500">
+                          {thDate.y}
+                        </div>
+                      </th>
+                    );
+                  })}
+                  <th className="px-2 py-4 border-l border-slate-200 dark:border-slate-700 min-w-[80px] text-center leading-tight whitespace-pre-line">
+                    <div className="text-[12px]">{getTrendHeader()}</div>
                   </th>
                   <th className="px-3 py-4 bg-indigo-50/40 dark:bg-indigo-900/20 border-l border-slate-200 dark:border-slate-700 min-w-[100px] text-center leading-tight text-[#1e3a8a] dark:text-indigo-300 font-extrabold">
                     <div className="text-[13px]">ประมาณการ</div>
